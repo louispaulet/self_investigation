@@ -130,12 +130,20 @@ function App() {
         <ChartCard title="Message themes" subtitle="Representative categories from commit messages" status={status} error={error}>
           <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
             <p className="mb-3 text-sm uppercase tracking-[0.28em] text-slate-400">Themes</p>
-            <div className="h-96 w-full">
+            <div className="h-[30rem] w-full">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={SORTED_THEMES} layout="vertical" margin={{ top: 10, right: 20, left: 140, bottom: 0 }}>
+                <BarChart data={SORTED_THEMES} layout="vertical" margin={{ top: 10, right: 20, left: 210, bottom: 0 }}>
                   <CartesianGrid stroke="rgba(148,163,184,0.15)" horizontal={false} />
                   <XAxis type="number" tickLine={false} axisLine={false} allowDecimals={false} />
-                  <YAxis dataKey="theme" type="category" tickLine={false} axisLine={false} width={150} interval={0} tick={{ width: 150, wordBreak: 'keep-all' }} />
+                  <YAxis
+                    dataKey="theme"
+                    type="category"
+                    tickLine={false}
+                    axisLine={false}
+                    width={210}
+                    interval={0}
+                    tick={{ width: 210, textAnchor: 'end' }}
+                  />
                   <Tooltip cursor={{ fill: 'rgba(148,163,184,0.08)' }} contentStyle={{ background: '#020617', border: '1px solid rgba(148,163,184,0.25)', borderRadius: '12px', color: '#e2e8f0' }} labelStyle={{ color: '#cbd5e1', fontWeight: 600 }} itemStyle={{ color: '#e2e8f0' }} />
                   <Bar dataKey="commits" radius={[0, 8, 8, 0]}>
                     {SORTED_THEMES.map((_, i) => (
