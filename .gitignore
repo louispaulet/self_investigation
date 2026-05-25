@@ -5,6 +5,16 @@
 # Keep the directory itself
 !/data/.gitkeep
 
+# Generated data
+/data/*.tsv
+/data/*.json
+/web/public/data/*.tsv
+/web/public/data/*.json
+
+# Keep the directory itself
+!/data/.gitkeep
+!/web/public/data/.gitkeep
+
 # Web dependencies
 /web/node_modules/
 /web/dist/
