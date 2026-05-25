@@ -24,6 +24,7 @@ function App() {
   const [rows, setRows] = useState([])
   const [status, setStatus] = useState('loading')
   const [error, setError] = useState('')
+  const [normalizeRepos, setNormalizeRepos] = useState(false)
 
   useEffect(() => {
     let alive = true
@@ -53,7 +54,31 @@ function App() {
 
   const hourData = useMemo(() => hourCounts(rows, ZONE.key), [rows])
   const dayData = useMemo(() => dayCounts(rows, ZONE.key), [rows])
-  const repoData = useMemo(() => repoCounts(rows).slice(0, 10), [rows])
+  const repoStats = useMemo(() => {
+    const top = repoCounts(rows).slice(0, 10)
+    const byRepo = new Map()
+    for (const row of rows) {
+      const repo = row.repo?.trim()
+      const date = row.author_date || row.authorDate || row.date
+      if (!repo || !date) continue
+      const projectDays = byRepo.get(repo) || new Set()
+      projectDays.add(date.slice(0, 10))
+      byRepo.set(repo, projectDays)
+    }
+    return top.map((item) => {
+      const daysSpent = byRepo.get(item.repo)?.size || 0
+      const normalized = daysSpent ? item.commits / daysSpent : 0
+      return { ...item, daysSpent, normalized }
+    })
+  }, [rows])
+  const repoData = repoStats
+    .slice()
+    .sort((a, b) => (normalizeRepos ? b.normalized - a.normalized : b.commits - a.commits) || a.repo.localeCompare(b.repo))
+    .map((item) => ({
+      repo: item.repo,
+      commits: normalizeRepos ? Number(item.normalized.toFixed(2)) : item.commits,
+      daysSpent: item.daysSpent,
+    }))
   const bedtimeData = useMemo(() => bedtimeCounts(rows, ZONE.key), [rows])
   const bestHour = bestIndex(hourData)
   const bedtimeHours = ['20', '21', '22', '23', '00', '01', '02', '03']
@@ -122,14 +147,35 @@ function App() {
 
         <ChartCard title="Repository activity" subtitle="Top repositories by commit count" status={status} error={error}>
           <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
-            <p className="mb-3 text-sm uppercase tracking-[0.28em] text-slate-400">Top 10</p>
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+              <p className="text-sm uppercase tracking-[0.28em] text-slate-400">Top 10</p>
+              <label className="flex items-center gap-2 text-sm text-slate-200">
+                <input
+                  type="checkbox"
+                  checked={normalizeRepos}
+                  onChange={(event) => setNormalizeRepos(event.target.checked)}
+                  className="h-4 w-4 rounded border-slate-500 bg-slate-900 text-cyan-400 accent-cyan-400"
+                />
+                Normalize by days spent on project
+              </label>
+            </div>
             <div className="h-[28rem] w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={repoData} layout="vertical" margin={{ top: 10, right: 20, left: 180, bottom: 0 }}>
                   <CartesianGrid stroke="rgba(148,163,184,0.15)" horizontal={false} />
                   <XAxis type="number" tickLine={false} axisLine={false} allowDecimals={false} />
                   <YAxis dataKey="repo" type="category" tickLine={false} axisLine={false} width={170} />
-                  <Tooltip cursor={{ fill: 'rgba(148,163,184,0.08)' }} contentStyle={{ background: '#020617', border: '1px solid rgba(148,163,184,0.25)', borderRadius: '12px', color: '#e2e8f0' }} labelStyle={{ color: '#cbd5e1', fontWeight: 600 }} itemStyle={{ color: '#e2e8f0' }} />
+                  <Tooltip
+                    cursor={{ fill: 'rgba(148,163,184,0.08)' }}
+                    contentStyle={{ background: '#020617', border: '1px solid rgba(148,163,184,0.25)', borderRadius: '12px', color: '#e2e8f0' }}
+                    labelStyle={{ color: '#cbd5e1', fontWeight: 600 }}
+                    itemStyle={{ color: '#e2e8f0' }}
+                    formatter={(value, name, props) => [
+                      normalizeRepos ? `${value} commits/day` : value,
+                      normalizeRepos ? 'normalized' : 'commits',
+                      props.payload?.daysSpent ? `${props.payload.daysSpent} active days` : '',
+                    ]}
+                  />
                   <Bar dataKey="commits" radius={[0, 8, 8, 0]}>
                     {repoData.map((_, i) => (
                       <Cell key={repoData[i].repo} fill={COLORS[i % COLORS.length]} />
