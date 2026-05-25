@@ -129,64 +129,6 @@ function App() {
 
         <ChartCard title="Repository activity" subtitle="Top repositories by commit count" status={status} error={error}>
           <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
-            <p className="mb-3 text-sm uppercase tracking-[0.28em] text-slate-400">Themes</p>
-            <div className="h-[30rem] w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={SORTED_THEMES} layout="vertical" margin={{ top: 10, right: 20, left: 210, bottom: 0 }}>
-                  <CartesianGrid stroke="rgba(148,163,184,0.15)" horizontal={false} />
-                  <XAxis type="number" tickLine={false} axisLine={false} allowDecimals={false} />
-                  <YAxis
-                    dataKey="theme"
-                    type="category"
-                    tickLine={false}
-                    axisLine={false}
-                    width={210}
-                    interval={0}
-                    tick={{ width: 210, textAnchor: 'end' }}
-                  />
-                  <Tooltip cursor={{ fill: 'rgba(148,163,184,0.08)' }} contentStyle={{ background: '#020617', border: '1px solid rgba(148,163,184,0.25)', borderRadius: '12px', color: '#e2e8f0' }} labelStyle={{ color: '#cbd5e1', fontWeight: 600 }} itemStyle={{ color: '#e2e8f0' }} />
-                  <Bar dataKey="commits" radius={[0, 8, 8, 0]}>
-                    {SORTED_THEMES.map((_, i) => (
-                      <Cell key={SORTED_THEMES[i].theme} fill={COLORS[i % COLORS.length]} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-            <div className="mt-4 grid grid-cols-2 gap-4">
-              <StatCard title="Top theme" value={SORTED_THEMES[0].theme} subtitle={`${SORTED_THEMES[0].commits} commits`} />
-              <StatCard title="Bottom theme" value={SORTED_THEMES[SORTED_THEMES.length - 1].theme} subtitle={`${SORTED_THEMES[SORTED_THEMES.length - 1].commits} commits`} />
-            </div>
-          </div>
-        </ChartCard>
-
-        <ChartCard title="Weekly peaks" subtitle="Commit count by day" status={status} error={error}>
-          <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
-            <p className="mb-3 text-sm uppercase tracking-[0.28em] text-slate-400">Paris</p>
-            <div className="h-72 w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={days.map((day, i) => ({ day, commits: dayData[i] }))} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
-                  <CartesianGrid stroke="rgba(148,163,184,0.15)" vertical={false} />
-                  <XAxis dataKey="day" tickLine={false} axisLine={false} />
-                  <YAxis tickLine={false} axisLine={false} allowDecimals={false} />
-                  <Tooltip cursor={{ fill: 'rgba(148,163,184,0.08)' }} contentStyle={{ background: '#020617', border: '1px solid rgba(148,163,184,0.25)', borderRadius: '12px', color: '#e2e8f0' }} labelStyle={{ color: '#cbd5e1', fontWeight: 600 }} itemStyle={{ color: '#e2e8f0' }} />
-                  <Bar dataKey="commits" radius={[8, 8, 0, 0]}>
-                    {days.map((_, i) => (
-                      <Cell key={days[i]} fill={COLORS[i % COLORS.length]} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-            <div className="mt-4 grid grid-cols-2 gap-4">
-              <StatCard title="Best day" value={days[bestIndex(dayData)]} subtitle={`${Math.max(...dayData)} commits`} />
-              <StatCard title="Best hour" value={`${String(bestHour).padStart(2, '0')}:00`} subtitle={`${hourData[bestHour]} commits`} />
-            </div>
-          </div>
-        </ChartCard>
-
-        <ChartCard title="Message themes" subtitle="Representative categories from commit messages" status={status} error={error}>
-          <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
             <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
               <p className="text-sm uppercase tracking-[0.28em] text-slate-400">Top 10</p>
               <label className="flex items-center gap-2 text-sm text-slate-200">
@@ -223,6 +165,64 @@ function App() {
                   </Bar>
                 </BarChart>
               </ResponsiveContainer>
+            </div>
+          </div>
+        </ChartCard>
+
+        <ChartCard title="Weekly peaks" subtitle="Commit count by day" status={status} error={error}>
+          <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
+            <p className="mb-3 text-sm uppercase tracking-[0.28em] text-slate-400">Paris</p>
+            <div className="h-72 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={days.map((day, i) => ({ day, commits: dayData[i] }))} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+                  <CartesianGrid stroke="rgba(148,163,184,0.15)" vertical={false} />
+                  <XAxis dataKey="day" tickLine={false} axisLine={false} />
+                  <YAxis tickLine={false} axisLine={false} allowDecimals={false} />
+                  <Tooltip cursor={{ fill: 'rgba(148,163,184,0.08)' }} contentStyle={{ background: '#020617', border: '1px solid rgba(148,163,184,0.25)', borderRadius: '12px', color: '#e2e8f0' }} labelStyle={{ color: '#cbd5e1', fontWeight: 600 }} itemStyle={{ color: '#e2e8f0' }} />
+                  <Bar dataKey="commits" radius={[8, 8, 0, 0]}>
+                    {days.map((_, i) => (
+                      <Cell key={days[i]} fill={COLORS[i % COLORS.length]} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="mt-4 grid grid-cols-2 gap-4">
+              <StatCard title="Best day" value={days[bestIndex(dayData)]} subtitle={`${Math.max(...dayData)} commits`} />
+              <StatCard title="Best hour" value={`${String(bestHour).padStart(2, '0')}:00`} subtitle={`${hourData[bestHour]} commits`} />
+            </div>
+          </div>
+        </ChartCard>
+
+        <ChartCard title="Message themes" subtitle="Representative categories from commit messages" status={status} error={error}>
+          <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
+            <p className="mb-3 text-sm uppercase tracking-[0.28em] text-slate-400">Themes</p>
+            <div className="h-[30rem] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={SORTED_THEMES} layout="vertical" margin={{ top: 10, right: 20, left: 210, bottom: 0 }}>
+                  <CartesianGrid stroke="rgba(148,163,184,0.15)" horizontal={false} />
+                  <XAxis type="number" tickLine={false} axisLine={false} allowDecimals={false} />
+                  <YAxis
+                    dataKey="theme"
+                    type="category"
+                    tickLine={false}
+                    axisLine={false}
+                    width={210}
+                    interval={0}
+                    tick={{ width: 210, textAnchor: 'end' }}
+                  />
+                  <Tooltip cursor={{ fill: 'rgba(148,163,184,0.08)' }} contentStyle={{ background: '#020617', border: '1px solid rgba(148,163,184,0.25)', borderRadius: '12px', color: '#e2e8f0' }} labelStyle={{ color: '#cbd5e1', fontWeight: 600 }} itemStyle={{ color: '#e2e8f0' }} />
+                  <Bar dataKey="commits" radius={[0, 8, 8, 0]}>
+                    {SORTED_THEMES.map((_, i) => (
+                      <Cell key={SORTED_THEMES[i].theme} fill={COLORS[i % COLORS.length]} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="mt-4 grid grid-cols-2 gap-4">
+              <StatCard title="Top theme" value={SORTED_THEMES[0].theme} subtitle={`${SORTED_THEMES[0].commits} commits`} />
+              <StatCard title="Bottom theme" value={SORTED_THEMES[SORTED_THEMES.length - 1].theme} subtitle={`${SORTED_THEMES[SORTED_THEMES.length - 1].commits} commits`} />
             </div>
           </div>
         </ChartCard>
