@@ -127,7 +127,7 @@ function App() {
           </aside>
         </div>
 
-        <ChartCard title="Message themes" subtitle="Representative categories from commit messages" status={status} error={error}>
+        <ChartCard title="Repository activity" subtitle="Top repositories by commit count" status={status} error={error}>
           <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
             <p className="mb-3 text-sm uppercase tracking-[0.28em] text-slate-400">Themes</p>
             <div className="h-[30rem] w-full">
@@ -185,7 +185,7 @@ function App() {
           </div>
         </ChartCard>
 
-        <ChartCard title="Repository activity" subtitle="Top repositories by commit count" status={status} error={error}>
+        <ChartCard title="Message themes" subtitle="Representative categories from commit messages" status={status} error={error}>
           <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
             <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
               <p className="text-sm uppercase tracking-[0.28em] text-slate-400">Top 10</p>
