@@ -187,8 +187,10 @@ function App() {
                 </BarChart>
               </ResponsiveContainer>
             </div>
-            <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <StatCard title="Best day" value={days[bestIndex(dayData)]} subtitle={`${Math.max(...dayData)} commits`} />
+            <div className="mt-4 flex justify-center">
+              <div className="w-full max-w-sm">
+                <StatCard title="Best day" value={days[bestIndex(dayData)]} subtitle={`${Math.max(...dayData)} commits`} />
+              </div>
             </div>
           </div>
         </ChartCard>
