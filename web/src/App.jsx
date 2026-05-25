@@ -83,16 +83,31 @@ function App() {
   const bestHour = bestIndex(hourData)
   const bedtimeHours = ['20', '21', '22', '23', '00', '01', '02', '03']
   const bedtimeTotal = bedtimeData.reduce((sum, value) => sum + value, 0)
+  const now = Date.now()
+  const recent24h = rows.filter((row) => within(row.author_date, now, 24)).length
+  const recent7d = rows.filter((row) => within(row.author_date, now, 24 * 7)).length
+  const recent30d = rows.filter((row) => within(row.author_date, now, 24 * 30)).length
 
   return (
     <main className="min-h-screen px-4 py-10 text-white sm:px-6 lg:px-8">
       <section className="mx-auto flex max-w-6xl flex-col gap-8">
-        <div className="flex flex-col gap-3">
-          <p className="text-sm uppercase tracking-[0.35em] text-cyan-300/80">self investigation</p>
-          <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-6xl">Commit activity radar</h1>
-          <p className="max-w-2xl text-sm text-slate-300 sm:text-base">
-            A live visual of commit intensity by day and hour, loaded from the generated GitHub commit dataset.
-          </p>
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(260px,0.8fr)] lg:items-start">
+          <div className="flex flex-col gap-3">
+            <p className="text-sm uppercase tracking-[0.35em] text-cyan-300/80">self investigation</p>
+            <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-6xl">Commit activity radar</h1>
+            <p className="max-w-2xl text-sm text-slate-300 sm:text-base">
+              A live visual of commit intensity by day and hour, loaded from the generated GitHub commit dataset.
+            </p>
+          </div>
+
+          <aside className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl shadow-cyan-950/30 backdrop-blur">
+            <p className="text-sm uppercase tracking-[0.28em] text-slate-400">Recent activity</p>
+            <div className="mt-6 grid gap-4">
+              <MetricCard label="Last 24h" value={recent24h} />
+              <MetricCard label="Past week" value={recent7d} />
+              <MetricCard label="Past month" value={recent30d} />
+            </div>
+          </aside>
         </div>
 
         <ChartCard title="Message themes" subtitle="Representative categories from commit messages" status={status} error={error}>
@@ -275,6 +290,21 @@ function StatCard({ title, value, subtitle }) {
       <p className="mt-2 text-sm text-slate-300">{subtitle}</p>
     </div>
   )
+}
+
+function MetricCard({ label, value }) {
+  return (
+    <div className="rounded-3xl border border-cyan-400/15 bg-cyan-400/5 p-5 text-center shadow-lg shadow-black/20">
+      <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/70">{label}</p>
+      <div className="mt-3 text-5xl font-semibold leading-none text-white">{value}</div>
+    </div>
+  )
+}
+
+function within(date, now, hours) {
+  if (!date) return false
+  const delta = now - new Date(date).getTime()
+  return delta >= 0 && delta <= hours * 60 * 60 * 1000
 }
 
 export default App
