@@ -5,5 +5,9 @@
 # Keep the directory itself
 !/data/.gitkeep
 
+# Web dependencies
+/web/node_modules/
+/web/dist/
+
 # OS/editor clutter
 .DS_Store
