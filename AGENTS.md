@@ -42,3 +42,4 @@ This project is for investigating your GitHub activity using the local `gh` CLI.
 - This is an empty project; create files as needed for analysis.
 - Be careful to distinguish commit author time, commit commit time, push time, and PR merge time.
 - When presenting results, separate raw measurements from interpretations.
+- Read `tone_of_voice.md` before writing or revising app copy.

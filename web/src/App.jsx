@@ -96,16 +96,13 @@ function App() {
             <p className="text-sm uppercase tracking-[0.35em] text-cyan-300/80">self investigation</p>
             <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-6xl">Commit activity radar</h1>
             <p className="max-w-3xl text-sm text-slate-300 sm:text-base leading-7">
-              Knowing oneself is a slow and disciplined practice. It requires looking honestly at what we do,
-              when we do it, and what patterns quietly shape our choices. Side projects are especially revealing,
-              because they are often where motivation is most personal and where habits are least filtered by
-              structure or expectation. This project exists as a way to study that hidden layer of work: not just
-              the code itself, but the rhythm behind it. By tracing commit activity over time, I can better
-              understand how I spend my attention, which projects draw me in, when I tend to build, when I tend
-              to polish, and whether my energy follows patterns I would not otherwise notice. In that sense,
-              this is less a dashboard than a mirror — a tool for reflection that helps me see what I am really
-              doing with my time when I work on side projects, and perhaps, over time, who I am becoming through
-              those repeated choices.
+              Knowing oneself is a slow and disciplined practice. It asks for attention to what we do, when we do
+              it, and the habits that shape our choices over time. Side projects are a useful place to look, because
+              they often reveal motivation in a direct and personal way. This project helps me study the hidden
+              rhythm of that work. By tracing commit activity over time, I can see how my attention moves, which
+              projects draw me in, when I build, when I refine, and which patterns repeat quietly in the background.
+              The goal is to understand how I spend my time when I work on side projects, and to learn from the
+              shape of that work with more clarity and honesty.
             </p>
           </div>
 
