@@ -13,7 +13,7 @@ import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-OUTPUT = ROOT.parent / "recent_commits.tsv"
+OUTPUT = ROOT.parent / "data" / "recent_commits.tsv"
 
 
 def main() -> None:
