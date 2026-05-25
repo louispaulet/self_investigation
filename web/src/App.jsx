@@ -11,12 +11,14 @@ import {
 } from 'recharts'
 import './App.css'
 import { dayCounts, hourCounts, parseTsv } from './data'
+import { MESSAGE_THEME_COUNTS } from './analysisThemes'
 
 const hours = Array.from({ length: 24 }, (_, hour) => `${String(hour).padStart(2, '0')}:00`)
 const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 const SOURCE = '/self_investigation/data/recent_commits.tsv'
 const ZONE = { key: 'Europe/Paris', label: 'Paris' }
 const COLORS = ['#34d399', '#2dd4bf', '#22d3ee', '#38bdf8', '#60a5fa', '#818cf8', '#a78bfa']
+const SORTED_THEMES = [...MESSAGE_THEME_COUNTS].sort((a, b) => b.commits - a.commits)
 
 function App() {
   const [rows, setRows] = useState([])
@@ -85,6 +87,31 @@ function App() {
             <div className="mt-4 grid grid-cols-2 gap-4">
               <StatCard title="Best day" value={days[bestIndex(dayData)]} subtitle={`${Math.max(...dayData)} commits`} />
               <StatCard title="Best hour" value={`${String(bestHour).padStart(2, '0')}:00`} subtitle={`${hourData[bestHour]} commits`} />
+            </div>
+          </div>
+        </ChartCard>
+
+        <ChartCard title="Message themes" subtitle="Representative categories from commit messages" status={status} error={error}>
+          <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
+            <p className="mb-3 text-sm uppercase tracking-[0.28em] text-slate-400">Themes</p>
+            <div className="h-96 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={SORTED_THEMES} layout="vertical" margin={{ top: 10, right: 20, left: 140, bottom: 0 }}>
+                  <CartesianGrid stroke="rgba(148,163,184,0.15)" horizontal={false} />
+                  <XAxis type="number" tickLine={false} axisLine={false} allowDecimals={false} />
+                  <YAxis dataKey="theme" type="category" tickLine={false} axisLine={false} width={130} />
+                  <Tooltip cursor={{ fill: 'rgba(148,163,184,0.08)' }} />
+                  <Bar dataKey="commits" radius={[0, 8, 8, 0]}>
+                    {SORTED_THEMES.map((_, i) => (
+                      <Cell key={SORTED_THEMES[i].theme} fill={COLORS[i % COLORS.length]} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="mt-4 grid grid-cols-2 gap-4">
+              <StatCard title="Top theme" value={SORTED_THEMES[0].theme} subtitle={`${SORTED_THEMES[0].commits} commits`} />
+              <StatCard title="Bottom theme" value={SORTED_THEMES[SORTED_THEMES.length - 1].theme} subtitle={`${SORTED_THEMES[SORTED_THEMES.length - 1].commits} commits`} />
             </div>
           </div>
         </ChartCard>
