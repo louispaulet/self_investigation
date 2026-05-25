@@ -14,6 +14,7 @@
 # Keep the directory itself
 !/data/.gitkeep
 !/web/public/data/.gitkeep
+!/web/public/data/recent_commits.tsv
 
 # Web dependencies
 /web/node_modules/
