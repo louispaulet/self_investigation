@@ -10,7 +10,7 @@ import {
   YAxis,
 } from 'recharts'
 import './App.css'
-import { dayCounts, hourCounts, parseTsv } from './data'
+import { bedtimeCounts, dayCounts, hourCounts, parseTsv, repoCounts } from './data'
 import { MESSAGE_THEME_COUNTS } from './analysisThemes'
 
 const hours = Array.from({ length: 24 }, (_, hour) => `${String(hour).padStart(2, '0')}:00`)
@@ -53,7 +53,11 @@ function App() {
 
   const hourData = useMemo(() => hourCounts(rows, ZONE.key), [rows])
   const dayData = useMemo(() => dayCounts(rows, ZONE.key), [rows])
+  const repoData = useMemo(() => repoCounts(rows).slice(0, 10), [rows])
+  const bedtimeData = useMemo(() => bedtimeCounts(rows, ZONE.key), [rows])
   const bestHour = bestIndex(hourData)
+  const bedtimeHours = ['20', '21', '22', '23', '00', '01', '02', '03']
+  const bedtimeTotal = bedtimeData.reduce((sum, value) => sum + value, 0)
 
   return (
     <main className="min-h-screen px-4 py-10 text-white sm:px-6 lg:px-8">
@@ -112,6 +116,53 @@ function App() {
             <div className="mt-4 grid grid-cols-2 gap-4">
               <StatCard title="Best day" value={days[bestIndex(dayData)]} subtitle={`${Math.max(...dayData)} commits`} />
               <StatCard title="Best hour" value={`${String(bestHour).padStart(2, '0')}:00`} subtitle={`${hourData[bestHour]} commits`} />
+            </div>
+          </div>
+        </ChartCard>
+
+        <ChartCard title="Repository activity" subtitle="Top repositories by commit count" status={status} error={error}>
+          <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
+            <p className="mb-3 text-sm uppercase tracking-[0.28em] text-slate-400">Top 10</p>
+            <div className="h-[28rem] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={repoData} layout="vertical" margin={{ top: 10, right: 20, left: 180, bottom: 0 }}>
+                  <CartesianGrid stroke="rgba(148,163,184,0.15)" horizontal={false} />
+                  <XAxis type="number" tickLine={false} axisLine={false} allowDecimals={false} />
+                  <YAxis dataKey="repo" type="category" tickLine={false} axisLine={false} width={170} />
+                  <Tooltip cursor={{ fill: 'rgba(148,163,184,0.08)' }} contentStyle={{ background: '#020617', border: '1px solid rgba(148,163,184,0.25)', borderRadius: '12px', color: '#e2e8f0' }} labelStyle={{ color: '#cbd5e1', fontWeight: 600 }} itemStyle={{ color: '#e2e8f0' }} />
+                  <Bar dataKey="commits" radius={[0, 8, 8, 0]}>
+                    {repoData.map((_, i) => (
+                      <Cell key={repoData[i].repo} fill={COLORS[i % COLORS.length]} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+        </ChartCard>
+
+        <ChartCard title="Bedtime pattern" subtitle="Late-night commit activity" status={status} error={error}>
+          <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
+            <p className="mb-3 text-sm uppercase tracking-[0.28em] text-slate-400">Paris, 20:00–03:00</p>
+            <div className="h-72 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={bedtimeHours.map((hour, i) => ({ hour, commits: bedtimeData[i] }))} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+                  <CartesianGrid stroke="rgba(148,163,184,0.15)" vertical={false} />
+                  <XAxis dataKey="hour" tickLine={false} axisLine={false} />
+                  <YAxis tickLine={false} axisLine={false} allowDecimals={false} />
+                  <Tooltip cursor={{ fill: 'rgba(148,163,184,0.08)' }} contentStyle={{ background: '#020617', border: '1px solid rgba(148,163,184,0.25)', borderRadius: '12px', color: '#e2e8f0' }} labelStyle={{ color: '#cbd5e1', fontWeight: 600 }} itemStyle={{ color: '#e2e8f0' }} />
+                  <Bar dataKey="commits" radius={[8, 8, 0, 0]}>
+                    {bedtimeHours.map((_, i) => (
+                      <Cell key={bedtimeHours[i]} fill={COLORS[i % COLORS.length]} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="mt-4 rounded-2xl border border-cyan-400/20 bg-cyan-400/5 p-5 text-center">
+              <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/70">Bedtime window</p>
+              <p className="mt-3 text-4xl font-semibold text-white">{bedtimeTotal} commits</p>
+              <p className="mt-2 text-sm text-slate-300">Combined activity from 20:00 to 03:00 Paris time</p>
             </div>
           </div>
         </ChartCard>
