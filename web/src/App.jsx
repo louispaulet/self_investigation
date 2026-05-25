@@ -228,32 +228,6 @@ function App() {
           </div>
         </ChartCard>
 
-        <ChartCard title="Bedtime pattern" subtitle="Late-night commit activity" status={status} error={error}>
-          <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
-            <p className="mb-3 text-sm uppercase tracking-[0.28em] text-slate-400">Paris, 20:00–03:00</p>
-            <div className="h-72 w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={bedtimeHours.map((hour, i) => ({ hour, commits: bedtimeData[i] }))} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
-                  <CartesianGrid stroke="rgba(148,163,184,0.15)" vertical={false} />
-                  <XAxis dataKey="hour" tickLine={false} axisLine={false} />
-                  <YAxis tickLine={false} axisLine={false} allowDecimals={false} />
-                  <Tooltip cursor={{ fill: 'rgba(148,163,184,0.08)' }} contentStyle={{ background: '#020617', border: '1px solid rgba(148,163,184,0.25)', borderRadius: '12px', color: '#e2e8f0' }} labelStyle={{ color: '#cbd5e1', fontWeight: 600 }} itemStyle={{ color: '#e2e8f0' }} />
-                  <Bar dataKey="commits" radius={[8, 8, 0, 0]}>
-                    {bedtimeHours.map((_, i) => (
-                      <Cell key={bedtimeHours[i]} fill={COLORS[i % COLORS.length]} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-            <div className="mt-4 rounded-2xl border border-cyan-400/20 bg-cyan-400/5 p-5 text-center">
-              <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/70">Bedtime window</p>
-              <p className="mt-3 text-4xl font-semibold text-white">{bedtimeTotal} commits</p>
-              <p className="mt-2 text-sm text-slate-300">Combined activity from 20:00 to 03:00 Paris time</p>
-            </div>
-          </div>
-        </ChartCard>
-
         <ChartCard title="Time of day" subtitle="Commit count by hour" status={status} error={error}>
           <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
             <p className="mb-3 text-sm uppercase tracking-[0.28em] text-slate-400">Paris</p>
@@ -276,6 +250,32 @@ function App() {
               <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/70">Best hour</p>
               <p className="mt-3 whitespace-nowrap text-4xl font-semibold text-white">{String(bestHour).padStart(2, '0')}:00 Paris</p>
               <p className="mt-2 text-sm text-slate-300">Paris commits: {hourData[bestHour]}</p>
+            </div>
+          </div>
+        </ChartCard>
+
+        <ChartCard title="Bedtime pattern" subtitle="Late-night commit activity" status={status} error={error}>
+          <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
+            <p className="mb-3 text-sm uppercase tracking-[0.28em] text-slate-400">Paris, 20:00–03:00</p>
+            <div className="h-72 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={bedtimeHours.map((hour, i) => ({ hour, commits: bedtimeData[i] }))} margin={{ top: 10, right: 10, left: 0, bottom: 40 }}>
+                  <CartesianGrid stroke="rgba(148,163,184,0.15)" vertical={false} />
+                  <XAxis dataKey="hour" tickLine={false} axisLine={false} />
+                  <YAxis tickLine={false} axisLine={false} allowDecimals={false} />
+                  <Tooltip cursor={{ fill: 'rgba(148,163,184,0.08)' }} contentStyle={{ background: '#020617', border: '1px solid rgba(148,163,184,0.25)', borderRadius: '12px', color: '#e2e8f0' }} labelStyle={{ color: '#cbd5e1', fontWeight: 600 }} itemStyle={{ color: '#e2e8f0' }} />
+                  <Bar dataKey="commits" radius={[6, 6, 0, 0]}>
+                    {bedtimeHours.map((_, i) => (
+                      <Cell key={bedtimeHours[i]} fill={COLORS[i % COLORS.length]} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="mt-4 rounded-2xl border border-cyan-400/20 bg-cyan-400/5 p-5 text-center">
+              <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/70">Bedtime window</p>
+              <p className="mt-3 text-4xl font-semibold text-white">{bedtimeTotal} commits</p>
+              <p className="mt-2 text-sm text-slate-300">Combined activity from 20:00 to 03:00 Paris time</p>
             </div>
           </div>
         </ChartCard>
