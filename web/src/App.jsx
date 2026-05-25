@@ -187,9 +187,8 @@ function App() {
                 </BarChart>
               </ResponsiveContainer>
             </div>
-            <div className="mt-4 grid grid-cols-2 gap-4">
+            <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
               <StatCard title="Best day" value={days[bestIndex(dayData)]} subtitle={`${Math.max(...dayData)} commits`} />
-              <StatCard title="Best hour" value={`${String(bestHour).padStart(2, '0')}:00`} subtitle={`${hourData[bestHour]} commits`} />
             </div>
           </div>
         </ChartCard>
