@@ -24,6 +24,8 @@ This project is for investigating your GitHub activity using the local `gh` CLI.
 - Keep intermediate data in the project directory when useful.
 - Document assumptions, data sources, and limitations clearly.
 - If something cannot be inferred reliably from GitHub data, say so.
+- After every change, commit and push it.
+- Use a simple, concise commit message.
 
 ## Suggested analysis sources
 
