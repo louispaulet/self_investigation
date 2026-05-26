@@ -8,7 +8,7 @@ const tooltipProps = {
   itemStyle: { color: '#e2e8f0' },
 }
 
-export default function ActivityBarChart({ data, layout = 'horizontal', xKey, yKey, xAxisProps = {}, yAxisProps = {}, barRadius, colorOffset = 0, margin }) {
+export default function ActivityBarChart({ data, layout = 'horizontal', xKey, yKey, dataKey = 'commits', xAxisProps = {}, yAxisProps = {}, barRadius, colorOffset = 0, margin }) {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart data={data} layout={layout} margin={margin}>
@@ -16,7 +16,7 @@ export default function ActivityBarChart({ data, layout = 'horizontal', xKey, yK
         <XAxis dataKey={xKey} type={layout === 'vertical' ? 'number' : 'category'} tickLine={false} axisLine={false} allowDecimals={false} {...xAxisProps} />
         <YAxis dataKey={yKey} type={layout === 'vertical' ? 'category' : 'number'} tickLine={false} axisLine={false} allowDecimals={false} {...yAxisProps} />
         <Tooltip {...tooltipProps} />
-        <Bar dataKey="commits" radius={barRadius}>
+        <Bar dataKey={dataKey} radius={barRadius}>
           {data.map((item, i) => <Cell key={item[xKey] ?? item[yKey]} fill={colors[(i + colorOffset) % colors.length]} />)}
         </Bar>
       </BarChart>

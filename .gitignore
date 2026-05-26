@@ -1,20 +1,17 @@
 # Generated data
 /data/*.tsv
 /data/*.json
-
-# Keep the directory itself
-!/data/.gitkeep
-
-# Generated data
-/data/*.tsv
-/data/*.json
 /web/public/data/*.tsv
 /web/public/data/*.json
 
 # Keep the directory itself
 !/data/.gitkeep
+!/data/commits_5y.tsv
+!/data/repos.tsv
 !/web/public/data/.gitkeep
+!/web/public/data/commits_5y.tsv
 !/web/public/data/recent_commits.tsv
+!/web/public/data/repos.tsv
 
 # Web dependencies
 /web/node_modules/
