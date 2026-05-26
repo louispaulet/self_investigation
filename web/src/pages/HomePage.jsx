@@ -26,9 +26,7 @@ function ActivityBarChart({ data, layout = 'horizontal', xKey, yKey, xAxisProps 
         <XAxis dataKey={xKey} type={layout === 'vertical' ? 'number' : 'category'} tickLine={false} axisLine={false} allowDecimals={false} {...xAxisProps} />
         <YAxis dataKey={yKey} type={layout === 'vertical' ? 'category' : 'number'} tickLine={false} axisLine={false} allowDecimals={false} {...yAxisProps} />
         <Tooltip {...tooltipProps} />
-        <Bar dataKey="commits" radius={barRadius}>
-          {data.map((item, i) => <Cell key={item[xKey] ?? item[yKey]} fill={colors[(i + colorOffset) % colors.length]} />)}
-        </Bar>
+        <Bar dataKey="commits" radius={barRadius}>{data.map((item, i) => <Cell key={item[xKey] ?? item[yKey]} fill={colors[(i + colorOffset) % colors.length]} />)}</Bar>
       </BarChart>
     </ResponsiveContainer>
   )
@@ -86,40 +84,15 @@ export default function HomePage() {
           <aside className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl shadow-cyan-950/30 backdrop-blur"><p className="text-sm uppercase tracking-[0.28em] text-slate-400">Recent activity</p><div className="mt-6 grid gap-4"><MetricCard label="Last 24h" value={recent24h} /><MetricCard label="Past week" value={recent7d} /><MetricCard label="Past month" value={recent30d} /></div></aside>
         </div>
 
-        <ChartCard title="Repository activity" subtitle="Top repositories by commit count" status={status} error={error}>
-          <PageSection eyebrow="Top 10" title="Repository ranking">
-            <label className="mb-4 flex items-center gap-2 text-sm text-slate-200"><input type="checkbox" checked={normalizeRepos} onChange={(event) => setNormalizeRepos(event.target.checked)} className="h-4 w-4 rounded border-slate-500 bg-slate-900 text-cyan-400 accent-cyan-400" />Normalize by days spent on project</label>
-            <div className="h-[28rem] w-full"><ActivityBarChart data={repoChartData} layout="vertical" xKey="commits" yKey="repo" xAxisProps={{ type: 'number' }} yAxisProps={{ width: 170 }} barRadius={[0, 8, 8, 0]} colorOffset={0} margin={{ top: 10, right: 20, left: 180, bottom: 0 }} /></div>
-          </PageSection>
-        </ChartCard>
+        <ChartCard title="Repository activity" subtitle="Top repositories by commit count" status={status} error={error}><PageSection eyebrow="Top 10" title="Repository ranking"><label className="mb-4 flex items-center gap-2 text-sm text-slate-200"><input type="checkbox" checked={normalizeRepos} onChange={(event) => setNormalizeRepos(event.target.checked)} className="h-4 w-4 rounded border-slate-500 bg-slate-900 text-cyan-400 accent-cyan-400" />Normalize by days spent on project</label><div className="h-[28rem] w-full"><ActivityBarChart data={repoChartData} layout="vertical" xKey="commits" yKey="repo" xAxisProps={{ type: 'number' }} yAxisProps={{ width: 170 }} barRadius={[0, 8, 8, 0]} colorOffset={0} margin={{ top: 10, right: 20, left: 180, bottom: 0 }} /></div></PageSection></ChartCard>
 
-        <ChartCard title="Weekly peaks" subtitle="Commit count by day" status={status} error={error}>
-          <PageSection eyebrow="Paris" title="Weekly activity">
-            <div className="h-72 w-full"><ActivityBarChart data={days.map((day, i) => ({ day, commits: dayData[i] }))} xKey="day" yKey="commits" barRadius={[8, 8, 0, 0]} colorOffset={1} margin={{ top: 10, right: 10, left: 0, bottom: 0 }} /></div>
-            <div className="mt-4 flex justify-center"><div className="w-full max-w-sm"><StatCard title="Best day" value={days[bestIndex(dayData)]} subtitle={`${Math.max(...dayData)} commits`} /></div></div>
-          </PageSection>
-        </ChartCard>
+        <ChartCard title="Weekly peaks" subtitle="Commit count by day" status={status} error={error}><PageSection eyebrow="Paris" title="Weekly activity"><div className="h-72 w-full"><ActivityBarChart data={days.map((day, i) => ({ day, commits: dayData[i] }))} xKey="day" yKey="commits" barRadius={[8, 8, 0, 0]} colorOffset={1} margin={{ top: 10, right: 10, left: 0, bottom: 0 }} /></div><div className="mt-4 flex justify-center"><div className="w-full max-w-sm"><StatCard title="Best day" value={days[bestIndex(dayData)]} subtitle={`${Math.max(...dayData)} commits`} /></div></div></PageSection></ChartCard>
 
-        <ChartCard title="Message themes" subtitle="Representative categories from commit messages" status={status} error={error}>
-          <PageSection eyebrow="Themes" title="Message categories">
-            <div className="h-[30rem] w-full"><ActivityBarChart data={sortedThemes} layout="vertical" xKey="commits" yKey="theme" xAxisProps={{ type: 'number' }} yAxisProps={{ width: 210, interval: 0, tick: { width: 210, textAnchor: 'end' } }} barRadius={[0, 8, 8, 0]} colorOffset={2} margin={{ top: 10, right: 20, left: 210, bottom: 0 }} /></div>
-            <div className="mt-4 grid grid-cols-2 gap-4"><StatCard title="Top theme" value={sortedThemes[0].theme} subtitle={`${sortedThemes[0].commits} commits`} /><StatCard title="Bottom theme" value={sortedThemes[sortedThemes.length - 1].theme} subtitle={`${sortedThemes[sortedThemes.length - 1].commits} commits`} /></div>
-          </PageSection>
-        </ChartCard>
+        <ChartCard title="Message themes" subtitle="Representative categories from commit messages" status={status} error={error}><PageSection eyebrow="Themes" title="Message categories"><div className="h-[30rem] w-full"><ActivityBarChart data={sortedThemes} layout="vertical" xKey="commits" yKey="theme" xAxisProps={{ type: 'number' }} yAxisProps={{ width: 210, interval: 0, tick: { width: 210, textAnchor: 'end' } }} barRadius={[0, 8, 8, 0]} colorOffset={2} margin={{ top: 10, right: 20, left: 210, bottom: 0 }} /></div><div className="mt-4 grid grid-cols-2 gap-4"><StatCard title="Top theme" value={sortedThemes[0].theme} subtitle={`${sortedThemes[0].commits} commits`} /><StatCard title="Bottom theme" value={sortedThemes[sortedThemes.length - 1].theme} subtitle={`${sortedThemes[sortedThemes.length - 1].commits} commits`} /></div></PageSection></ChartCard>
 
-        <ChartCard title="Bedtime pattern" subtitle="Late-night commit activity" status={status} error={error}>
-          <PageSection eyebrow="Paris, 20:00–03:00" title="Late-night activity">
-            <div className="h-72 w-full"><ActivityBarChart data={bedtimeHours.map((hour, i) => ({ hour, commits: bedtimeData[i] }))} xKey="hour" yKey="commits" barRadius={[6, 6, 0, 0]} colorOffset={3} margin={{ top: 10, right: 10, left: 0, bottom: 40 }} /></div>
-            <InsightCard label="Bedtime window" value={bedtimeTotal} detail="Combined activity from 20:00 to 03:00 Paris time" />
-          </PageSection>
-        </ChartCard>
+        <ChartCard title="Bedtime pattern" subtitle="Late-night commit activity" status={status} error={error}><PageSection eyebrow="Paris, 20:00–03:00" title="Late-night activity"><div className="h-72 w-full"><ActivityBarChart data={bedtimeHours.map((hour, i) => ({ hour, commits: bedtimeData[i] }))} xKey="hour" yKey="commits" barRadius={[6, 6, 0, 0]} colorOffset={3} margin={{ top: 10, right: 10, left: 0, bottom: 40 }} /></div><div className="mt-4"><InsightCard label="Bedtime window" value={bedtimeTotal} detail="Combined activity from 20:00 to 03:00 Paris time" /></div></PageSection></ChartCard>
 
-        <ChartCard title="Time of day" subtitle="Commit count by hour" status={status} error={error}>
-          <PageSection eyebrow="Paris" title="Hourly activity">
-            <div className="h-72 w-full"><ActivityBarChart data={hours.map((hour, i) => ({ hour, commits: hourData[i] }))} xKey="hour" yKey="commits" barRadius={[6, 6, 0, 0]} colorOffset={4} margin={{ top: 10, right: 10, left: 0, bottom: 40 }} /></div>
-            <InsightCard label="Best hour" value={`${String(bestHour).padStart(2, '0')}:00`} detail={`Paris commits: ${hourData[bestHour]}`} />
-          </PageSection>
-        </ChartCard>
+        <ChartCard title="Time of day" subtitle="Commit count by hour" status={status} error={error}><PageSection eyebrow="Paris" title="Hourly activity"><div className="h-72 w-full"><ActivityBarChart data={hours.map((hour, i) => ({ hour, commits: hourData[i] }))} xKey="hour" yKey="commits" barRadius={[6, 6, 0, 0]} colorOffset={4} margin={{ top: 10, right: 10, left: 0, bottom: 40 }} /></div><div className="mt-4"><InsightCard label="Best hour" value={`${String(bestHour).padStart(2, '0')}:00`} detail={`Paris commits: ${hourData[bestHour]}`} /></div></PageSection></ChartCard>
       </section>
     </main>
   )
