@@ -10,4 +10,4 @@ build:
 	cd web && npm run build
 
 deploy: build
-	cd web && npx gh-pages -d dist
+	cd web && npx gh-pages -d dist --dotfiles --nojekyll --before-add ./gh-pages-before-add.cjs
