@@ -68,19 +68,19 @@ export default function HomePage() {
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.65fr)] lg:items-start">
           <div className="flex flex-col gap-5">
             <p className="text-sm uppercase tracking-[0.35em] text-teal-200/80">self investigation</p>
-            <h1 className="max-w-4xl text-4xl font-semibold text-white sm:text-6xl">Five years of commit rhythm</h1>
+            <h1 className="max-w-4xl text-4xl font-semibold text-white sm:text-6xl">Five years of GitHub attention</h1>
             <SectionText />
             <div className="grid gap-3 sm:grid-cols-3">
               <StatCard title="Code added" value={formatNumber(stats.additions)} subtitle="Lines reported by GitHub" />
-              <StatCard title="Code removed" value={formatNumber(stats.deletions)} subtitle="Across public owned repos" />
-              <StatCard title="Files touched" value={formatNumber(stats.changedFiles)} subtitle="Changed-file total" />
+              <StatCard title="Code removed" value={formatNumber(stats.deletions)} subtitle="Public owned repositories" />
+              <StatCard title="Files touched" value={formatNumber(stats.changedFiles)} subtitle="Files changed in commits" />
             </div>
           </div>
           <SummarySection recent24h={recent24h} recent7d={recent7d} recent30d={recent30d} stats={status === 'ready' ? stats : emptyStats} />
         </div>
 
         <div className="grid gap-8 xl:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)]">
-          <SectionChart title="Activity over time" subtitle="Monthly commits from the five-year TSV" eyebrow="Timeline" status={status} error={error}>
+          <SectionChart title="Activity over time" subtitle="Monthly commits from the five-year export" eyebrow="Timeline" status={status} error={error}>
             <div className="h-80 w-full">
               <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                 <AreaChart data={monthData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
@@ -99,42 +99,42 @@ export default function HomePage() {
               </ResponsiveContainer>
             </div>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              <InsightCard label="Busiest month" value={maxMonth?.month || '...'} detail={`${maxMonth?.commits || 0} commits`} />
-              <InsightCard label="Busiest repo" value={shortRepo(busiestRepo?.repo)} detail={`${busiestRepo?.commits || 0} commits in this view`} />
+              <InsightCard label="Most active month" value={maxMonth?.month || '...'} detail={`${maxMonth?.commits || 0} commits`} />
+              <InsightCard label="Most active repo" value={shortRepo(busiestRepo?.repo)} detail={`${busiestRepo?.commits || 0} commits in this view`} />
             </div>
           </SectionChart>
 
-          <SectionChart title="Annual shape" subtitle="Commit count by year" eyebrow="Years" status={status} error={error}>
+          <SectionChart title="Annual shape" subtitle="Commit volume by year" eyebrow="Years" status={status} error={error}>
             <div className="h-80 w-full">
               <ActivityBarChart data={yearData} xKey="year" yKey="commits" barRadius={[8, 8, 0, 0]} colorOffset={1} margin={{ top: 10, right: 10, left: 0, bottom: 0 }} />
             </div>
           </SectionChart>
         </div>
 
-        <SectionChart title="Repository activity" subtitle="Top repositories by commit count" eyebrow="Top 10" status={status} error={error}>
-          <label className="mb-4 flex items-center gap-2 text-sm text-slate-200"><input type="checkbox" checked={normalizeRepos} onChange={(event) => setNormalizeRepos(event.target.checked)} className="h-4 w-4 rounded border-slate-500 bg-slate-900 text-teal-400 accent-teal-400" />Normalize by days spent on project</label>
+        <SectionChart title="Repository activity" subtitle="Repositories receiving the most commits" eyebrow="Top 10" status={status} error={error}>
+          <label className="mb-4 flex items-center gap-2 text-sm text-slate-200"><input type="checkbox" checked={normalizeRepos} onChange={(event) => setNormalizeRepos(event.target.checked)} className="h-4 w-4 rounded border-slate-500 bg-slate-900 text-teal-400 accent-teal-400" />View commits per active day</label>
           <div className="h-[30rem] w-full"><ActivityBarChart data={repoChartData} layout="vertical" xKey="commits" yKey="repo" xAxisProps={{ type: 'number' }} yAxisProps={{ width: 180 }} barRadius={[0, 8, 8, 0]} colorOffset={0} margin={{ top: 10, right: 20, left: 190, bottom: 0 }} /></div>
         </SectionChart>
 
         <div className="grid gap-8 xl:grid-cols-2">
-          <SectionChart title="Weekly cadence" subtitle="Commit count by weekday" eyebrow="Paris" status={status} error={error}>
+          <SectionChart title="Weekly cadence" subtitle="Commit volume by weekday" eyebrow="Paris" status={status} error={error}>
             <div className="h-72 w-full"><ActivityBarChart data={days.map((day, i) => ({ day, commits: dayData[i] }))} xKey="day" yKey="commits" barRadius={[8, 8, 0, 0]} colorOffset={2} margin={{ top: 10, right: 10, left: 0, bottom: 0 }} /></div>
-            <div className="mt-4"><InsightCard label="Best day" value={days[bestDay]} detail={`${Math.max(...dayData)} commits`} /></div>
+            <div className="mt-4"><InsightCard label="Most active day" value={days[bestDay]} detail={`${Math.max(...dayData)} commits`} /></div>
           </SectionChart>
 
-          <SectionChart title="Time of day" subtitle="Commit count by hour" eyebrow="Paris" status={status} error={error}>
+          <SectionChart title="Time of day" subtitle="Commit volume by hour" eyebrow="Paris" status={status} error={error}>
             <div className="h-72 w-full"><ActivityBarChart data={hours.map((hour, i) => ({ hour, commits: hourData[i] }))} xKey="hour" yKey="commits" barRadius={[6, 6, 0, 0]} colorOffset={3} margin={{ top: 10, right: 10, left: 0, bottom: 40 }} /></div>
-            <div className="mt-4"><InsightCard label="Best hour" value={`${String(bestHour).padStart(2, '0')}:00`} detail={`Paris commits: ${hourData[bestHour]}`} /></div>
+            <div className="mt-4"><InsightCard label="Most active hour" value={`${String(bestHour).padStart(2, '0')}:00`} detail={`Paris commits: ${hourData[bestHour]}`} /></div>
           </SectionChart>
         </div>
 
         <div className="grid gap-8 xl:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-          <SectionChart title="Bedtime pattern" subtitle="Late-night commit activity" eyebrow="Paris, 20:00-03:00" status={status} error={error}>
+          <SectionChart title="Evening and night" subtitle="Commit activity from late day into early morning" eyebrow="Paris, 20:00-03:00" status={status} error={error}>
             <div className="h-72 w-full"><ActivityBarChart data={bedtimeHours.map((hour, i) => ({ hour, commits: bedtimeData[i] }))} xKey="hour" yKey="commits" barRadius={[6, 6, 0, 0]} colorOffset={4} margin={{ top: 10, right: 10, left: 0, bottom: 40 }} /></div>
-            <div className="mt-4"><InsightCard label="Bedtime window" value={bedtimeTotal} detail="Combined activity from 20:00 to 03:00 Paris time" /></div>
+            <div className="mt-4"><InsightCard label="Night window" value={bedtimeTotal} detail="Combined activity from 20:00 to 03:00 Paris time" /></div>
           </SectionChart>
 
-          <SectionChart title="Last 52 weeks" subtitle="A compact view of recent weekly volume" eyebrow="Weeks" status={status} error={error}>
+          <SectionChart title="Last 52 weeks" subtitle="Recent weekly volume in a compact line" eyebrow="Weeks" status={status} error={error}>
             <div className="h-72 w-full">
               <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                 <LineChart data={weekData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
@@ -149,7 +149,7 @@ export default function HomePage() {
           </SectionChart>
         </div>
 
-        <SectionChart title="Message themes" subtitle="Simple keyword categories computed from commit messages" eyebrow="Themes" status={status} error={error}>
+        <SectionChart title="Message themes" subtitle="Keyword categories computed from commit messages" eyebrow="Themes" status={status} error={error}>
           <div className="h-[30rem] w-full"><ActivityBarChart data={themes} layout="vertical" xKey="commits" yKey="theme" xAxisProps={{ type: 'number' }} yAxisProps={{ width: 170, interval: 0, tick: { width: 170, textAnchor: 'end' } }} barRadius={[0, 8, 8, 0]} colorOffset={5} margin={{ top: 10, right: 20, left: 175, bottom: 0 }} /></div>
         </SectionChart>
 
@@ -157,9 +157,9 @@ export default function HomePage() {
           <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-sm uppercase tracking-[0.28em] text-slate-400">Recent commits</p>
-              <h2 className="text-xl font-semibold text-white">Latest rows in the TSV</h2>
+              <h2 className="text-xl font-semibold text-white">Latest commits in the export</h2>
             </div>
-            <p className="text-sm text-slate-300">Commit time is committer time. Push time is not available per commit from this source.</p>
+            <p className="text-sm text-slate-300">Commit time uses the committer timestamp. Push time requires a separate GitHub source.</p>
           </div>
           <div className="grid gap-3">
             {latest.map((row) => (
@@ -176,7 +176,7 @@ export default function HomePage() {
 
         <section className="rounded-2xl border border-amber-200/15 bg-amber-200/[0.06] p-6 text-sm leading-7 text-amber-50/85">
           <p className="font-semibold text-amber-50">Measurement notes</p>
-          <p>Author time and committer time are available in the TSV. The dashboard groups by committer time in Europe/Paris. GitHub does not expose a reliable push timestamp for each commit through this data source, and PR merge time needs separate PR data.</p>
+          <p>Author time and committer time are available in the export. The dashboard groups by committer time in Europe/Paris. Push timestamps and PR merge timestamps require separate GitHub sources, so they are treated as distinct measurements.</p>
         </section>
       </section>
     </main>

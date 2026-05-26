@@ -6,15 +6,16 @@ export default function AboutPage() {
         <h1 className="text-4xl font-semibold tracking-tight">Why this project exists</h1>
         <div className="space-y-4 text-sm leading-7 text-slate-300 sm:text-base">
           <p>
-            This site turns commit history into a small personal dashboard. It focuses on patterns in time, project
-            concentration, and the shape of work across days and hours.
+            This site turns GitHub activity into a personal record of attention. It follows when commits happen,
+            which projects receive sustained work, and how small acts of building repeat across days and hours.
           </p>
           <p>
-            The data comes from local GitHub analysis scripts and a TSV export. The charts are meant to support
-            reflection, not to claim perfect accuracy about intent or productivity.
+            The data comes from local GitHub analysis scripts and TSV exports. The charts support reflection by
+            showing measured activity, visible habits, and the limits of what the source data can explain.
           </p>
           <p>
-            Use the hash-based routes to move between the dashboard and supporting pages without server configuration.
+            The project separates raw measurements from interpretation. Commit timestamps, repository counts, and
+            message themes describe observable traces; any reading of intent stays careful and provisional.
           </p>
         </div>
       </section>
