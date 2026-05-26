@@ -70,6 +70,9 @@ export default function HomePage() {
             <p className="text-sm uppercase tracking-[0.35em] text-teal-200/80">self investigation</p>
             <h1 className="max-w-4xl text-4xl font-semibold text-white sm:text-6xl">Five years of GitHub attention</h1>
             <SectionText />
+            <p className="text-xs font-medium uppercase tracking-[0.22em] text-teal-100/60">
+              Last refreshed {formatLastUpdated(import.meta.env.VITE_APP_UPDATED_AT)}
+            </p>
             <div className="grid gap-3 sm:grid-cols-3">
               <StatCard title="Code added" value={formatNumber(stats.additions)} subtitle="Lines reported by GitHub" />
               <StatCard title="Code removed" value={formatNumber(stats.deletions)} subtitle="Public owned repositories" />
@@ -190,6 +193,16 @@ function formatNumber(value) {
 function formatDate(value) {
   if (!value) return ''
   return new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeStyle: 'short', timeZone: zone.key }).format(new Date(value))
+}
+
+function formatLastUpdated(value) {
+  if (!value) return ''
+  const formatted = new Intl.DateTimeFormat('en-GB', {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+    timeZone: zone.key,
+  }).format(new Date(value))
+  return `${formatted} Paris time`
 }
 
 function shortRepo(repo = '') {
