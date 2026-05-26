@@ -82,7 +82,7 @@ export default function HomePage() {
         <div className="grid gap-8 xl:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)]">
           <SectionChart title="Activity over time" subtitle="Monthly commits from the five-year TSV" eyebrow="Timeline" status={status} error={error}>
             <div className="h-80 w-full">
-              <ResponsiveContainer width="100%" height="100%">
+              <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                 <AreaChart data={monthData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                   <defs>
                     <linearGradient id="commitArea" x1="0" y1="0" x2="0" y2="1">
@@ -136,7 +136,7 @@ export default function HomePage() {
 
           <SectionChart title="Last 52 weeks" subtitle="A compact view of recent weekly volume" eyebrow="Weeks" status={status} error={error}>
             <div className="h-72 w-full">
-              <ResponsiveContainer width="100%" height="100%">
+              <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                 <LineChart data={weekData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                   <CartesianGrid stroke="rgba(148,163,184,0.14)" vertical={false} />
                   <XAxis dataKey="week" tickLine={false} axisLine={false} minTickGap={28} />

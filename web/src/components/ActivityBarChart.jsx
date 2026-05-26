@@ -10,14 +10,14 @@ const tooltipProps = {
 
 export default function ActivityBarChart({ data, layout = 'horizontal', xKey, yKey, dataKey = 'commits', xAxisProps = {}, yAxisProps = {}, barRadius, colorOffset = 0, margin }) {
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height="100%" minWidth={0}>
       <BarChart data={data} layout={layout} margin={margin}>
         <CartesianGrid stroke="rgba(148,163,184,0.15)" vertical={layout === 'horizontal'} horizontal={layout === 'vertical'} />
         <XAxis dataKey={xKey} type={layout === 'vertical' ? 'number' : 'category'} tickLine={false} axisLine={false} allowDecimals={false} {...xAxisProps} />
         <YAxis dataKey={yKey} type={layout === 'vertical' ? 'category' : 'number'} tickLine={false} axisLine={false} allowDecimals={false} {...yAxisProps} />
         <Tooltip {...tooltipProps} />
         <Bar dataKey={dataKey} radius={barRadius}>
-          {data.map((item, i) => <Cell key={item[xKey] ?? item[yKey]} fill={colors[(i + colorOffset) % colors.length]} />)}
+          {data.map((item, i) => <Cell key={`${item[yKey] ?? item[xKey]}-${i}`} fill={colors[(i + colorOffset) % colors.length]} />)}
         </Bar>
       </BarChart>
     </ResponsiveContainer>
