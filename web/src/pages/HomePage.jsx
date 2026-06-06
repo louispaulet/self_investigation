@@ -115,7 +115,7 @@ export default function HomePage() {
         </div>
 
         <SectionChart title="Repository activity" subtitle="Repositories receiving the most commits" eyebrow="Top 10" status={status} error={error}>
-          <label className="mb-4 flex items-center gap-2 text-sm text-slate-200"><input type="checkbox" checked={normalizeRepos} onChange={(event) => setNormalizeRepos(event.target.checked)} className="h-4 w-4 rounded border-slate-500 bg-slate-900 text-teal-400 accent-teal-400" />View commits per active day</label>
+          <label className="mb-4 flex items-center gap-2 text-sm text-slate-200"><input type="checkbox" checked={normalizeRepos} onChange={(event) => setNormalizeRepos(event.target.checked)} className="h-4 w-4 rounded border-slate-500 bg-slate-900 text-teal-400 accent-teal-400" />Remove days without commits</label>
           <div className="h-[30rem] w-full"><ActivityBarChart data={repoChartData} layout="vertical" xKey="commits" yKey="repo" xAxisProps={{ type: 'number' }} yAxisProps={{ width: 180 }} barRadius={[0, 8, 8, 0]} colorOffset={0} margin={{ top: 10, right: 20, left: 190, bottom: 0 }} /></div>
         </SectionChart>
 
