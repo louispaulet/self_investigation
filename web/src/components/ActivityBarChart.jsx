@@ -10,7 +10,7 @@ const tooltipProps = {
 
 export default function ActivityBarChart({ data, layout = 'horizontal', xKey, yKey, dataKey = 'commits', xAxisProps = {}, yAxisProps = {}, barRadius, colorOffset = 0, margin }) {
   return (
-    <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+    <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
       <BarChart data={data} layout={layout} margin={margin}>
         <CartesianGrid stroke="rgba(148,163,184,0.15)" vertical={layout === 'horizontal'} horizontal={layout === 'vertical'} />
         <XAxis dataKey={xKey} type={layout === 'vertical' ? 'number' : 'category'} tickLine={false} axisLine={false} allowDecimals={false} {...xAxisProps} />
