@@ -11,29 +11,30 @@ louispaulet/RealESRGAN_docker_local_gpu	2022-11-09T02:29:26Z	2022-11-07T21:50:56
 louispaulet/Taquin	2015-04-12T15:56:55Z	2015-04-12T15:56:55Z		master
 louispaulet/ai_art_ressources	2022-09-21T13:43:41Z	2022-09-21T12:30:04Z	Stable diffusion and latent diffusion notebooks	main
 louispaulet/artstation_chrome_ext	2023-06-04T20:22:01Z	2023-06-03T13:36:51Z	A chrome extension for accelerating Artstation uploads	main
-louispaulet/benchmark_experiments	2026-05-25T20:18:20Z	2024-06-11T12:35:14Z	A repo where we benchmark LLMs against MMLU and other datasets	main
-louispaulet/bernard_generator	2026-05-25T20:18:23Z	2026-05-18T10:17:46Z	Simulating the life of bernards	main
+louispaulet/benchmark_experiments	2026-05-26T23:27:13Z	2024-06-11T12:35:14Z	A repo where we benchmark LLMs against MMLU and other datasets	main
+louispaulet/bernard_generator	2026-05-26T16:18:46Z	2026-05-18T10:17:46Z	Simulating the life of bernards	main
 louispaulet/card_display	2026-05-15T00:26:24Z	2023-03-28T21:59:02Z	An app to display cards	main
 louispaulet/card_share	2026-05-15T00:26:16Z	2023-04-13T01:51:02Z	A project to share cards easily	main
 louispaulet/checkout_documentation	2025-05-26T22:16:48Z	2025-05-26T21:07:56Z	Checkout.com cookbook	main
 louispaulet/codeberg-migration	2026-05-01T22:51:41Z	2026-05-01T22:46:26Z		main
-louispaulet/crossref_news	2026-05-25T20:18:18Z	2026-04-19T16:02:49Z	Academic news using Crossref API	main
+louispaulet/crossref_news	2026-05-26T16:18:17Z	2026-04-19T16:02:49Z	Academic news using Crossref API	main
 louispaulet/dbx_repo_course_day_2	2026-01-23T15:02:23Z	2026-01-23T14:59:23Z	a temp repo for the DBX lab second day	main
 louispaulet/dirty_candidates_map	2026-05-15T00:25:37Z	2024-07-03T13:39:23Z	A map to show where dirty candidates are located.	main
 louispaulet/distributed_systems_project	2016-12-30T20:20:43Z	2016-12-30T20:18:20Z	le projet à faire pour dans pas longtemps	master
 louispaulet/docker_stable_diffusion_v2	2022-11-29T14:35:19Z	2022-11-29T14:30:30Z	Run stable diffusion V2 jupyter notebook inside a docker container	master
 louispaulet/elk_test	2023-05-17T02:20:08Z	2023-05-17T02:20:07Z	a simple elk stack test on docker compose	main
+louispaulet/empty-room-demo	2026-06-06T10:23:31Z	2026-06-03T22:21:45Z		main
 louispaulet/esp32_control_panel	2020-12-09T21:06:58Z	2020-12-09T14:04:49Z	A web control panel for esp32	main
 louispaulet/eyeo_case_study	2023-02-23T15:41:25Z	2022-12-19T01:12:10Z	Adtech for the topics API	main
-louispaulet/face_emotion_in_browser_demo	2026-05-25T20:18:22Z	2026-05-22T13:33:55Z	Detecting face emotions in the browser	main
+louispaulet/face_emotion_in_browser_demo	2026-05-26T16:18:44Z	2026-05-22T13:33:55Z	Detecting face emotions in the browser	main
 louispaulet/ffmpeg_jupyterlab_docker	2022-11-09T02:47:31Z	2022-11-09T02:38:53Z	Jupyterlab docker with FFMPEG	main
-louispaulet/fraud_tinder	2026-05-25T20:18:26Z	2026-05-12T21:58:41Z	Categorize fraud/scams a la tinder	main
+louispaulet/fraud_tinder	2026-05-26T16:18:27Z	2026-05-12T21:58:41Z	Categorize fraud/scams a la tinder	main
 louispaulet/french_bible	2022-09-21T12:18:39Z	2022-03-24T04:10:02Z	Parse french bible to test NLP stuff	main
-louispaulet/generative_website	2026-05-25T20:18:13Z	2023-10-09T20:29:49Z	A website that generates itself	main
+louispaulet/generative_website	2026-05-26T16:18:13Z	2023-10-09T20:29:49Z	A website that generates itself	main
 louispaulet/gpt4_readline	2023-05-22T17:47:11Z	2023-05-20T00:39:36Z	An input repo for GPT4 text input	main
-louispaulet/gpt_recommender	2026-05-25T20:18:20Z	2025-05-30T19:39:37Z	General recommender system	main
+louispaulet/gpt_recommender	2026-05-26T16:18:21Z	2025-05-30T19:39:37Z	General recommender system	main
 louispaulet/gpu_monitoring	2024-12-14T16:02:21Z	2024-11-26T22:14:32Z	simple docker compose project to monitor GPU stats	main
-louispaulet/groq_funny_stuff	2026-05-25T20:18:12Z	2025-09-12T21:24:00Z		main
+louispaulet/groq_funny_stuff	2026-05-26T16:18:10Z	2025-09-12T21:24:00Z		main
 louispaulet/hatvp-w-codex	2025-08-20T22:32:36Z	2025-08-09T21:23:37Z	hatvp analysis based on codex	main
 louispaulet/hatvp_rag	2024-06-16T20:42:15Z	2024-06-16T20:10:13Z	Perform RAG (retrieval augmented generation) on HATVP datasets	main
 louispaulet/hatvp_rag_api	2024-06-18T10:02:01Z	2024-06-16T21:26:54Z	HATVP RAG API	main
@@ -41,11 +42,11 @@ louispaulet/hatvp_rag_front	2024-06-18T10:02:35Z	2024-06-17T08:26:30Z	A frontend
 louispaulet/hatvp_reactjs_viz	2026-05-25T21:58:04Z	2024-06-19T07:47:52Z	A test of reactjs to display hatvp	main
 louispaulet/hatvp_streamlit_dataviz	2024-06-18T22:27:21Z	2024-06-18T20:14:11Z	A streamlit test on HATVP data	main
 louispaulet/hatvp_viz	2023-05-24T16:08:23Z	2023-05-24T02:47:04Z	Visualisation of HATVP public dataset	main
-louispaulet/hatvp_viz_website	2026-05-25T22:38:02Z	2023-06-21T22:06:29Z	The website part of hatvp_viz project	main
+louispaulet/hatvp_viz_website	2026-06-03T21:32:12Z	2023-06-21T22:06:29Z	The website part of hatvp_viz project	main
 louispaulet/head_checker	2025-06-09T09:00:05Z	2025-05-31T12:40:07Z	check the header of a url	main
-louispaulet/hotpepperz	2026-05-25T20:18:14Z	2026-03-27T23:23:02Z	a hot pepper website	main
+louispaulet/hotpepperz	2026-05-26T16:18:23Z	2026-03-27T23:23:02Z	a hot pepper website	main
 louispaulet/image_gen_1	2025-05-19T22:31:39Z	2025-05-05T16:02:44Z	have fun with image generation	main
-louispaulet/images_on_a_map	2026-05-25T20:18:07Z	2023-06-06T13:26:24Z	Display images on a geo map	main
+louispaulet/images_on_a_map	2026-05-26T16:18:30Z	2023-06-06T13:26:24Z	Display images on a geo map	main
 louispaulet/imdb_embeddings	2023-08-06T16:31:20Z	2023-08-06T16:26:19Z	Embeddings of IMDB data - visualizations	main
 louispaulet/jekyll-docker-compose-hello-world	2023-03-22T15:36:12Z	2023-03-22T15:30:19Z	A simple docker-compose project that contains a Hello World jekyll website	main
 louispaulet/karaoke_light	2023-04-08T21:48:51Z	2023-04-08T21:47:31Z	A simple karaoke app	main
@@ -56,16 +57,17 @@ louispaulet/local_audio_generation	2024-06-06T22:07:06Z	2024-06-06T09:29:24Z	A s
 louispaulet/local_cactus_needle	2026-05-14T13:36:54Z	2026-05-14T13:06:14Z	Testing the new local tool calling LLM	main
 louispaulet/local_gpu_batch	2025-08-03T20:16:56Z	2025-08-03T20:03:28Z	Local LLM batch process	main
 louispaulet/louispaulet	2026-05-01T22:27:05Z	2023-03-22T03:12:31Z	my profile repo	main
-louispaulet/louispaulet.github.io	2026-05-22T14:06:48Z	2024-06-24T12:38:29Z	Testing Vite + React for a new blog	main
+louispaulet/louispaulet.github.io	2026-06-03T22:40:34Z	2024-06-24T12:38:29Z	Testing Vite + React for a new blog	main
 louispaulet/louispaulet.github.io_old	2024-06-24T20:23:48Z	2023-03-21T02:29:20Z	Louis Paulet Portfolio	master
 louispaulet/loulou_blog	2023-03-22T23:13:42Z	2023-03-22T23:13:33Z	a blog	main
 louispaulet/manalyzer	2023-03-28T03:49:01Z	2023-03-24T18:29:20Z	analyze gender bias in text	main
 louispaulet/maze_benchmark	2025-06-11T22:26:10Z	2024-05-05T22:14:04Z	Compare LLMs on maze generation task	main
 louispaulet/menu_display	2024-08-29T15:42:02Z	2023-04-09T21:40:39Z	Beautiful website to display restaurant menus	main
-louispaulet/menu_display_2	2026-05-25T20:18:12Z	2024-08-28T11:52:56Z	A new menu display using FLUX for images and Vite+React for the website	main
+louispaulet/menu_display_2	2026-05-26T16:18:37Z	2024-08-28T11:52:56Z	A new menu display using FLUX for images and Vite+React for the website	main
+louispaulet/michelin-restaurants	2026-05-28T23:09:02Z	2026-05-28T17:37:09Z	A light way to explore Michelin star restaurant in Paris	main
 louispaulet/mistral_api	2024-01-17T13:28:14Z	2024-01-17T13:28:13Z	A mistral test api	main
-louispaulet/mnist_client	2026-05-25T20:18:15Z	2024-09-03T16:02:20Z	MNIST inference on the client side	main
-louispaulet/monitor_live_projects	2026-05-25T20:18:24Z	2026-05-14T23:29:56Z	Light monitoring page to check on live projects	main
+louispaulet/mnist_client	2026-05-26T16:18:15Z	2024-09-03T16:02:20Z	MNIST inference on the client side	main
+louispaulet/monitor_live_projects	2026-05-26T16:18:54Z	2026-05-14T23:29:56Z	Light monitoring page to check on live projects	main
 louispaulet/nantes_polytech_data_science	2022-02-18T06:08:59Z	2022-02-18T05:40:20Z	An open repo of my raw resources as a data science student at Nantes Polytech.	main
 louispaulet/open_interpreter_docker	2024-05-17T16:41:51Z	2024-05-14T14:24:07Z	A docker-compose env to run open interpreter	main
 louispaulet/opensearch_xml_ingest	2024-09-21T00:50:21Z	2024-09-21T00:50:17Z	A test on XML file ingestion in opensearch	main
@@ -75,22 +77,22 @@ louispaulet/pdf_watermark_pipeline	2022-02-08T14:08:30Z	2022-02-08T14:07:37Z	Add
 louispaulet/plan_the_week_in_menus	2026-04-26T15:18:49Z	2026-04-26T12:56:57Z	Plan the week in menus, based on rules and genrated interfaces.	main
 louispaulet/pmu	2023-01-28T02:01:11Z	2018-06-15T23:06:55Z		master
 louispaulet/polling_prompts	2024-12-14T13:13:24Z	2024-12-07T12:54:11Z	A prompt and many completions, what will happen	main
-louispaulet/ponzi_simulator	2026-05-25T20:18:08Z	2026-05-14T19:32:26Z	A simple ponzi scheme simulator where you choose the parameters and watch it collapse	main
-louispaulet/pretty_cats	2026-05-25T20:18:08Z	2024-07-18T17:21:28Z	A website to see pretty cats	main
+louispaulet/ponzi_simulator	2026-05-26T16:18:22Z	2026-05-14T19:32:26Z	A simple ponzi scheme simulator where you choose the parameters and watch it collapse	main
+louispaulet/pretty_cats	2026-05-26T16:18:07Z	2024-07-18T17:21:28Z	A website to see pretty cats	main
 louispaulet/problems_and_solutions	2023-07-09T12:48:03Z	2023-07-08T14:03:04Z	A repo for problems and their solutions	main
 louispaulet/qag_dataflow	2023-04-14T22:25:34Z	2023-04-14T22:25:34Z	QAG DataFlow enrichment	main
 louispaulet/qag_viewer	2023-04-16T20:22:10Z	2023-04-14T14:01:29Z	A simple and light QAG viewer based on opendata JSON QAG exports	main
 louispaulet/randomForestClassifierVisualizationProject	2020-12-14T01:32:10Z	2020-12-09T15:06:56Z	A RandomForestClassifier Visualization Project	main
-louispaulet/ratp_time	2026-05-25T20:18:10Z	2024-09-23T21:27:02Z	Get the time of interesting transports	main
+louispaulet/ratp_time	2026-05-26T16:18:38Z	2024-09-23T21:27:02Z	Get the time of interesting transports	main
 louispaulet/recipe_display	2023-04-12T20:49:13Z	2023-04-12T20:12:45Z	A simple and light website to display JSON recipes.	master
 louispaulet/relationship_graphs	2023-05-14T23:00:18Z	2023-05-14T22:56:16Z	relationship graphs for fictional or real characters	main
 louispaulet/relgraph-GPT	2023-05-15T09:10:24Z	2023-05-15T09:10:05Z		master
 louispaulet/roberta_fine_tuning	2023-04-25T23:14:42Z	2023-04-25T23:13:44Z	A repo for all my roberta (and maybe bert) fine-tuning experiments	main
-louispaulet/seamless-tester	2026-05-25T20:18:16Z	2026-04-27T18:05:04Z	Browser tool for checking whether textures and images tile seamlessly	main
-louispaulet/self_investigation	2026-05-25T23:59:30Z	2026-05-25T22:46:30Z	What my commits say about me	main
+louispaulet/seamless-tester	2026-05-26T16:18:41Z	2026-04-27T18:05:04Z	Browser tool for checking whether textures and images tile seamlessly	main
+louispaulet/self_investigation	2026-05-26T17:06:12Z	2026-05-25T22:46:30Z	What my commits say about me	main
 louispaulet/senat_parse	2022-03-01T16:40:37Z	2022-03-01T15:41:23Z	Parse french senate debates into timestamped interventions	main
-louispaulet/simple_city_builder	2026-05-25T20:18:05Z	2026-05-13T20:56:36Z	A simple city builder that runs in the browser	main
-louispaulet/simple_game_of_life	2026-05-25T20:18:19Z	2024-10-14T15:50:23Z	A simple game of life demonstration	main
+louispaulet/simple_city_builder	2026-05-26T16:18:02Z	2026-05-13T20:56:36Z	A simple city builder that runs in the browser	main
+louispaulet/simple_game_of_life	2026-05-26T16:18:36Z	2024-10-14T15:50:23Z	A simple game of life demonstration	main
 louispaulet/simple_jarvis	2023-07-30T14:43:05Z	2023-07-15T16:50:40Z		main
 louispaulet/sort_framed_and_unframed_paintings	2022-11-14T00:07:02Z	2022-11-14T00:07:02Z	Sort a folder of paintings into separate folders of framed and unframed paintings using CLIP	main
 louispaulet/static_dashboard	2023-06-19T12:57:50Z	2023-06-19T12:57:49Z	A static dashboard test for github pages	main
@@ -98,10 +100,10 @@ louispaulet/summarize_youtube_video	2026-04-19T13:25:07Z	2026-04-18T22:57:55Z	Si
 louispaulet/take-home-ds-case2-louis-paulet	2022-03-11T12:12:21Z	2022-03-10T13:05:48Z		master
 louispaulet/the-great-repository-of-knowledge	2026-05-16T01:43:50Z	2026-05-16T00:58:14Z	Text written by LLMs	main
 louispaulet/timeline_backend	2024-07-05T15:27:29Z	2024-07-05T14:47:41Z	A fastapi backend to generate timelines using tool calling and groq cloud	main
-louispaulet/timeline_frontend	2026-05-25T20:18:02Z	2024-07-05T15:06:44Z	A frontend to display timelines based on a JSON Timeline made by an LLM	main
+louispaulet/timeline_frontend	2026-05-26T16:18:24Z	2024-07-05T15:06:44Z	A frontend to display timelines based on a JSON Timeline made by an LLM	main
 louispaulet/timeline_light	2024-07-05T23:33:58Z	2023-05-15T22:37:01Z	A light web app to visualize timelines	main
 louispaulet/top_secret_docs	2023-06-17T18:02:33Z	2023-06-17T14:39:04Z	Imaginary top secret documents	main
 louispaulet/tortoise-tts-docker	2024-10-15T08:24:27Z	2023-04-08T02:10:09Z	Tortoise TTS Fast on docker	main
 louispaulet/vllm_local_llm	2024-05-27T16:47:09Z	2024-05-27T16:41:15Z	Some tests using vllm openai server	main
 louispaulet/whisper_docker_compose	2023-04-26T22:08:29Z	2023-04-26T21:59:46Z	A simple whisper test using docker compose to use local GPU	main
-louispaulet/wikipedia-curiosity-cabinet	2026-05-25T20:18:04Z	2026-05-14T21:26:36Z	Weird wikipedia facts	main
+louispaulet/wikipedia-curiosity-cabinet	2026-05-26T16:18:01Z	2026-05-14T21:26:36Z	Weird wikipedia facts	main
