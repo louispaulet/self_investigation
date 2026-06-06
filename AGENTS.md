@@ -6,11 +6,14 @@ This project is for investigating your GitHub activity using the local `gh` CLI.
 
 - which commits were pushed
 - when they were pushed
+- when GitHub Pages deployments finished
 - which project they belong to
 - how often you push
+- how often you deploy public Pages projects
 - commit message themes and inspirations
-- commit timestamp patterns, including:
+- commit and deployment timestamp patterns, including:
   - time of day you commit most
+  - time of day you deploy most
   - time of day you push most
   - time of day you merge PRs
   - possible bedtime patterns
@@ -36,10 +39,12 @@ This project is for investigating your GitHub activity using the local `gh` CLI.
 - repository commit history
 - PR history and merge timestamps
 - commit messages and author timestamps
+- GitHub Pages configuration and deployment statuses
 
 ## Notes
 
 - This is an empty project; create files as needed for analysis.
 - Be careful to distinguish commit author time, commit commit time, push time, and PR merge time.
+- Be careful to distinguish deployment creation time from successful deployment status time.
 - When presenting results, separate raw measurements from interpretations.
 - Read `tone_of_voice.md` before writing or revising app copy.

@@ -7,9 +7,11 @@
 # Keep the directory itself
 !/data/.gitkeep
 !/data/commits_5y.tsv
+!/data/deployments_gh_pages.tsv
 !/data/repos.tsv
 !/web/public/data/.gitkeep
 !/web/public/data/commits_5y.tsv
+!/web/public/data/deployments_gh_pages.tsv
 !/web/public/data/recent_commits.tsv
 !/web/public/data/repos.tsv
 

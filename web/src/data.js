@@ -31,7 +31,7 @@ export function dayCounts(rows, timeZone = 'UTC', field = 'committer_date') {
   return counts
 }
 
-export function repoCounts(rows) {
+export function repoCounts(rows, metricKey = 'commits') {
   const counts = new Map()
   for (const row of rows) {
     const repo = row.repo?.trim()
@@ -39,8 +39,8 @@ export function repoCounts(rows) {
     counts.set(repo, (counts.get(repo) || 0) + 1)
   }
   return [...counts.entries()]
-    .map(([repo, commits]) => ({ repo, commits }))
-    .sort((a, b) => b.commits - a.commits || a.repo.localeCompare(b.repo))
+    .map(([repo, count]) => ({ repo, [metricKey]: count }))
+    .sort((a, b) => b[metricKey] - a[metricKey] || a.repo.localeCompare(b.repo))
 }
 
 export function bedtimeCounts(rows, timeZone = 'UTC') {
@@ -80,33 +80,33 @@ export function totalStats(rows, timeZone = 'UTC') {
   }
 }
 
-export function monthCounts(rows, timeZone = 'UTC') {
+export function monthCounts(rows, timeZone = 'UTC', field = 'committer_date', metricKey = 'commits') {
   const counts = new Map()
   for (const row of rows) {
-    const key = localMonthKey(pickDate(row), timeZone)
+    const key = localMonthKey(pickDate(row, field), timeZone)
     if (key) counts.set(key, (counts.get(key) || 0) + 1)
   }
-  return [...counts.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([month, commits]) => ({ month, commits }))
+  return [...counts.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([month, count]) => ({ month, [metricKey]: count }))
 }
 
-export function yearCounts(rows, timeZone = 'UTC') {
+export function yearCounts(rows, timeZone = 'UTC', field = 'committer_date', metricKey = 'commits') {
   const counts = new Map()
   for (const row of rows) {
-    const key = localYearKey(pickDate(row), timeZone)
+    const key = localYearKey(pickDate(row, field), timeZone)
     if (key) counts.set(key, (counts.get(key) || 0) + 1)
   }
-  return [...counts.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([year, commits]) => ({ year, commits }))
+  return [...counts.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([year, count]) => ({ year, [metricKey]: count }))
 }
 
-export function weekCounts(rows, timeZone = 'UTC') {
+export function weekCounts(rows, timeZone = 'UTC', field = 'committer_date', metricKey = 'commits') {
   const counts = new Map()
   for (const row of rows) {
-    const day = localDateKey(pickDate(row), timeZone)
+    const day = localDateKey(pickDate(row, field), timeZone)
     if (!day) continue
     const week = weekKey(day)
     counts.set(week, (counts.get(week) || 0) + 1)
   }
-  return [...counts.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([week, commits]) => ({ week, commits }))
+  return [...counts.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([week, count]) => ({ week, [metricKey]: count }))
 }
 
 export function themeCounts(rows) {
@@ -132,9 +132,9 @@ export function themeCounts(rows) {
     .sort((a, b) => b.commits - a.commits || a.theme.localeCompare(b.theme))
 }
 
-export function recentCommits(rows, count = 8) {
+export function recentCommits(rows, count = 8, field = 'committer_date') {
   return [...rows]
-    .sort((a, b) => new Date(pickDate(b)).getTime() - new Date(pickDate(a)).getTime())
+    .sort((a, b) => new Date(pickDate(b, field)).getTime() - new Date(pickDate(a, field)).getTime())
     .slice(0, count)
 }
 

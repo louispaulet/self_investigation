@@ -7,15 +7,15 @@ export default function AboutPage() {
         <div className="space-y-4 text-sm leading-7 text-slate-300 sm:text-base">
           <p>
             This site turns GitHub activity into a personal record of attention. It follows when commits happen,
-            which projects receive sustained work, and how small acts of building repeat across days and hours.
+            which projects receive sustained work, when GitHub Pages deployments finish, and how small acts of building repeat across days and hours.
           </p>
           <p>
-            The data comes from local GitHub analysis scripts and TSV exports. The charts support reflection by
-            showing measured activity, visible habits, and the limits of what the source data can explain.
+            The data comes from local GitHub analysis scripts and TSV exports. Commit charts use committer timestamps.
+            Deployment charts use successful GitHub Pages status timestamps. Each source carries its own limits.
           </p>
           <p>
-            The project separates raw measurements from interpretation. Commit timestamps, repository counts, and
-            message themes describe observable traces; any reading of intent stays careful and provisional.
+            The project separates raw measurements from interpretation. Commit timestamps, repository counts,
+            deployment records, and message themes describe observable traces. Any reading of intent stays careful and provisional.
           </p>
         </div>
       </section>

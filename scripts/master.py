@@ -20,6 +20,10 @@ def main() -> None:
         ["python3", str(ROOT / "extract_commits.py"), "--mode", args.mode, "--sync-web"],
         check=True,
     )
+    subprocess.run(
+        ["python3", str(ROOT / "extract_deployments.py"), "--mode", args.mode, "--sync-web"],
+        check=True,
+    )
 
 
 if __name__ == "__main__":
