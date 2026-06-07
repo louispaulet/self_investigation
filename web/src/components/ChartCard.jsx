@@ -1,12 +1,12 @@
 export default function ChartCard({ title, subtitle, children, status, error }) {
   return (
     <section className="rounded-2xl border border-white/10 bg-white/[0.06] p-5 shadow-xl shadow-black/20 backdrop-blur sm:p-6">
-      <div className="mb-6 flex items-center justify-between gap-4">
+      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h2 className="text-xl font-semibold text-white">{title}</h2>
           <p className="text-sm text-slate-300">{subtitle}</p>
         </div>
-        <div className="shrink-0 rounded-full border border-teal-300/30 bg-teal-300/10 px-3 py-1 text-xs text-teal-100">
+        <div className="w-fit shrink-0 rounded-full border border-teal-300/30 bg-teal-300/10 px-3 py-1 text-xs text-teal-100">
           {status === 'ready' ? 'live data' : status}
         </div>
       </div>

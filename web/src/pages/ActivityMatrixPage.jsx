@@ -93,7 +93,7 @@ export default function ActivityMatrixPage() {
 
 function YearMatrix({ year, max }) {
   return (
-    <section className="rounded-3xl border border-white/10 bg-white/[0.05] p-5 shadow-2xl shadow-cyan-950/20">
+    <section className="min-w-0 rounded-3xl border border-white/10 bg-white/[0.05] p-5 shadow-2xl shadow-cyan-950/20">
       <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-sm uppercase tracking-[0.28em] text-slate-400">Year</p>
@@ -105,7 +105,7 @@ function YearMatrix({ year, max }) {
           <span><strong className="block text-white">{formatNumber(year.max)}</strong><span className="text-slate-400">daily max</span></span>
         </div>
       </div>
-      <div className="overflow-x-auto pb-2">
+      <div className="max-w-full overflow-x-auto pb-2">
         <div className="min-w-[760px]">
           <div className="mb-2 grid pl-10 text-xs text-slate-400" style={{ gridTemplateColumns: `repeat(${year.weekCount}, minmax(0, 1fr))` }}>
             {year.monthMarkers.map((marker) => (

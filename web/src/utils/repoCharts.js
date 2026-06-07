@@ -14,6 +14,10 @@ export function getRepoChartData(rows, normalizeRepos) {
   return top.map((item) => {
     const daysSpent = byRepo.get(item.repo)?.size || 0
     const normalized = daysSpent ? item.commits / daysSpent : 0
-    return { repo: item.repo, commits: normalizeRepos ? Number(normalized.toFixed(2)) : item.commits, daysSpent }
+    return { repo: item.repo, repoLabel: shortRepo(item.repo), commits: normalizeRepos ? Number(normalized.toFixed(2)) : item.commits, daysSpent }
   })
+}
+
+function shortRepo(repo = '') {
+  return repo.split('/').pop() || repo
 }

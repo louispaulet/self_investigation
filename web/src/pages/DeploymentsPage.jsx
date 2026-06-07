@@ -46,7 +46,7 @@ export default function DeploymentsPage() {
   const monthData = useMemo(() => monthCounts(successfulRows, zone.key, 'deploy_at', 'deployments'), [successfulRows])
   const yearData = useMemo(() => yearCounts(successfulRows, zone.key, 'deploy_at', 'deployments'), [successfulRows])
   const weekData = useMemo(() => weekCounts(successfulRows, zone.key, 'deploy_at', 'deployments').slice(-52), [successfulRows])
-  const repoData = useMemo(() => repoCounts(successfulRows, 'deployments').slice(0, 10), [successfulRows])
+  const repoData = useMemo(() => repoCounts(successfulRows, 'deployments').slice(0, 10).map((row) => ({ ...row, repoLabel: shortRepo(row.repo) })), [successfulRows])
   const hourData = useMemo(() => hourCounts(successfulRows, zone.key, 'deploy_at'), [successfulRows])
   const dayData = useMemo(() => dayCounts(successfulRows, zone.key, 'deploy_at'), [successfulRows])
   const latest = useMemo(() => recentCommits(successfulRows, 8, 'deploy_at'), [successfulRows])
@@ -123,7 +123,7 @@ export default function DeploymentsPage() {
 
         <SectionChart title="Repository deployments" subtitle="Repositories with the most successful Pages deployments" eyebrow="Top 10" status={status} error={error}>
           <div className="h-[30rem] w-full">
-            <ActivityBarChart data={repoData} layout="vertical" xKey="deployments" yKey="repo" dataKey="deployments" xAxisProps={{ type: 'number' }} yAxisProps={{ width: 180 }} barRadius={[0, 8, 8, 0]} colorOffset={2} margin={{ top: 10, right: 20, left: 190, bottom: 0 }} />
+            <ActivityBarChart data={repoData} layout="vertical" xKey="deployments" yKey="repoLabel" dataKey="deployments" xAxisProps={{ type: 'number' }} yAxisProps={{ width: 170 }} barRadius={[0, 8, 8, 0]} colorOffset={2} />
           </div>
         </SectionChart>
 

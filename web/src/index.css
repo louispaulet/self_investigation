@@ -30,3 +30,8 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.recharts-cartesian-axis-tick-value {
+  fill: #cbd5e1;
+  font-size: 12px;
+}

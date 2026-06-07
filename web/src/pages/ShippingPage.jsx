@@ -64,7 +64,7 @@ export default function ShippingPage() {
   const repoData = useMemo(() => repoFunnel(publicRepoSet, publicCommits, publicDeployments), [publicRepoSet, publicCommits, publicDeployments])
   const topShippingRepos = useMemo(() => repoData.filter((row) => row.commits >= 5).sort(byShippingRate).slice(0, 10), [repoData])
   const lowShippingRepos = useMemo(() => repoData.filter((row) => row.commits >= 10 && row.shippingRate <= 10).sort(byCommitVolume).slice(0, 10), [repoData])
-  const deployGapRepos = useMemo(() => repoData.filter((row) => row.medianDeployGapDays !== null).sort((a, b) => a.medianDeployGapDays - b.medianDeployGapDays || b.deployments - a.deployments).slice(0, 10), [repoData])
+  const deployGapRepos = useMemo(() => repoData.filter((row) => row.medianDeployGapHours !== null).sort((a, b) => a.medianDeployGapHours - b.medianDeployGapHours || b.deployments - a.deployments).slice(0, 10), [repoData])
   const publishHeavyMonth = useMemo(() => monthData.filter((row) => row.commits > 0 && row.deployments > 0).sort((a, b) => b.shippingRate - a.shippingRate || b.deployments - a.deployments)[0], [monthData])
   const mostCommittedLowDeploy = lowShippingRepos[0]
   const displayStats = status === 'ready' ? stats : emptyStats
@@ -127,21 +127,21 @@ export default function ShippingPage() {
         <div className="grid gap-8 xl:grid-cols-2">
           <SectionChart title="Highest shipping ratios" subtitle="Public repos with at least five commits" eyebrow="Deployments per 100 commits" status={status} error={error}>
             <div className="h-[30rem] min-h-0 w-full min-w-0">
-              {chartsReady ? <ActivityBarChart data={topShippingRepos} layout="vertical" xKey="shippingRate" yKey="repoLabel" dataKey="shippingRate" xAxisProps={{ type: 'number' }} yAxisProps={{ width: 170 }} barRadius={[0, 8, 8, 0]} colorOffset={3} margin={{ top: 10, right: 20, left: 180, bottom: 0 }} /> : null}
+              {chartsReady ? <ActivityBarChart data={topShippingRepos} layout="vertical" xKey="shippingRate" yKey="repoLabel" dataKey="shippingRate" xAxisProps={{ type: 'number' }} yAxisProps={{ width: 170 }} barRadius={[0, 8, 8, 0]} colorOffset={3} /> : null}
             </div>
           </SectionChart>
 
           <SectionChart title="Many commits, few deployments" subtitle="Public repos at or below ten deployments per 100 commits" eyebrow="Shipping pockets" status={status} error={error}>
             <div className="h-[30rem] min-h-0 w-full min-w-0">
-              {chartsReady ? <ActivityBarChart data={lowShippingRepos} layout="vertical" xKey="commits" yKey="repoLabel" dataKey="commits" xAxisProps={{ type: 'number' }} yAxisProps={{ width: 170 }} barRadius={[0, 8, 8, 0]} colorOffset={0} margin={{ top: 10, right: 20, left: 180, bottom: 0 }} /> : null}
+              {chartsReady ? <ActivityBarChart data={lowShippingRepos} layout="vertical" xKey="commits" yKey="repoLabel" dataKey="commits" xAxisProps={{ type: 'number' }} yAxisProps={{ width: 170 }} barRadius={[0, 8, 8, 0]} colorOffset={0} /> : null}
             </div>
           </SectionChart>
         </div>
 
         <div className="grid gap-8 xl:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-          <SectionChart title="Median deployment gaps" subtitle="Median days between successful Pages deployments by public repo" eyebrow="Publishing rhythm" status={status} error={error}>
+          <SectionChart title="Median deployment gaps" subtitle="Median hours between successful Pages deployments by public repo" eyebrow="Publishing rhythm" status={status} error={error}>
             <div className="h-[30rem] min-h-0 w-full min-w-0">
-              {chartsReady ? <ActivityBarChart data={deployGapRepos} layout="vertical" xKey="medianDeployGapDays" yKey="repoLabel" dataKey="medianDeployGapDays" xAxisProps={{ type: 'number' }} yAxisProps={{ width: 170 }} barRadius={[0, 8, 8, 0]} colorOffset={2} margin={{ top: 10, right: 20, left: 180, bottom: 0 }} /> : null}
+              {chartsReady ? <ActivityBarChart data={deployGapRepos} layout="vertical" xKey="medianDeployGapHours" yKey="repoLabel" dataKey="medianDeployGapHours" xAxisProps={{ type: 'number', allowDecimals: true, tickFormatter: formatHoursAxis }} yAxisProps={{ width: 170 }} barRadius={[0, 8, 8, 0]} colorOffset={2} /> : null}
             </div>
           </SectionChart>
 
@@ -251,16 +251,16 @@ function repoFunnel(publicRepoSet, commits, deployments) {
     .map((row) => ({
       ...row,
       shippingRate: Number(rate(row.deployments, row.commits).toFixed(1)),
-      medianDeployGapDays: medianDeployGapDays(row.deployDates),
+      medianDeployGapHours: medianDeployGapHours(row.deployDates),
     }))
 }
 
-function medianDeployGapDays(dates) {
+function medianDeployGapHours(dates) {
   const sorted = dates.map((date) => new Date(date).getTime()).filter(Number.isFinite).sort((a, b) => a - b)
   if (sorted.length < 2) return null
   const gaps = []
-  for (let i = 1; i < sorted.length; i += 1) gaps.push((sorted[i] - sorted[i - 1]) / 86400000)
-  return Number(median(gaps).toFixed(1))
+  for (let i = 1; i < sorted.length; i += 1) gaps.push((sorted[i] - sorted[i - 1]) / 3600000)
+  return Number(median(gaps).toFixed(2))
 }
 
 function median(values) {
@@ -304,6 +304,10 @@ function formatNumber(value) {
 
 function formatRate(value) {
   return new Intl.NumberFormat('en-US', { maximumFractionDigits: 1 }).format(value || 0)
+}
+
+function formatHoursAxis(value) {
+  return new Intl.NumberFormat('en-US', { maximumFractionDigits: value < 1 ? 1 : 0 }).format(value || 0)
 }
 
 function formatLastUpdated(value) {
