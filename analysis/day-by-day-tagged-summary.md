@@ -1,64 +1,67 @@
 # Day-by-Day Tagged Summary
 
-This summary assigns each day of activity a dominant commit-message category based on the commit messages in that day.
+This summary assigns each active day a dominant commit-message theme from the tagged five-year commit export. Dominance is measured by the most frequent `message_theme` among commits on that day.
 
-## Category set used
+## Raw measurements
 
-- docs & instructions
-- initial setup / bootstrap
-- website / deployment
-- crawler / seo
-- monitoring / discovery
-- data / content
-- cleanup / removal
-- bugfix / iteration
-- feature build
-- other
+- Commits tagged: 2,208
+- Active days: 231
+- Theme classes used: 22
+- Unclassified commits: 3
+- Days dominated by `Unclassified`: 0
 
-## Dominant category by day
+## Dominant theme on the busiest days
 
-| Day | Commits | Dominant category | Count |
+| Day | Commits | Dominant theme | Theme count |
 | --- | ---: | --- | ---: |
-| 2026-03-01 | 18 | other | 7 |
-| 2026-03-03 | 3 | docs & instructions | 2 |
-| 2026-03-04 | 1 | cleanup / removal | 1 |
-| 2026-03-27 | 1 | initial setup / bootstrap | 1 |
-| 2026-03-28 | 7 | feature build | 3 |
-| 2026-04-01 | 16 | other | 9 |
-| 2026-04-06 | 5 | other | 2 |
-| 2026-04-10 | 4 | other | 3 |
-| 2026-04-12 | 2 | cleanup / removal | 1 |
-| 2026-04-16 | 3 | other | 1 |
-| 2026-04-17 | 8 | other | 5 |
-| 2026-04-18 | 29 | feature build | 8 |
-| 2026-04-19 | 52 | other | 20 |
-| 2026-04-21 | 1 | cleanup / removal | 1 |
-| 2026-04-24 | 19 | other | 9 |
-| 2026-04-25 | 47 | other | 20 |
-| 2026-04-26 | 35 | feature build | 15 |
-| 2026-04-27 | 16 | other | 8 |
-| 2026-05-01 | 43 | other | 16 |
-| 2026-05-02 | 16 | other | 6 |
-| 2026-05-03 | 29 | other | 18 |
-| 2026-05-12 | 4 | docs & instructions | 2 |
-| 2026-05-13 | 14 | feature build | 6 |
-| 2026-05-14 | 39 | other | 11 |
-| 2026-05-15 | 29 | website / deployment | 11 |
-| 2026-05-16 | 2 | feature build | 1 |
-| 2026-05-18 | 7 | other | 4 |
-| 2026-05-22 | 4 | feature build | 3 |
-| 2026-05-24 | 6 | feature build | 5 |
-| 2026-05-25 | 46 | crawler / seo | 21 |
+| 2026-05-25 | 91 | Crawler / SEO / metadata | 22 |
+| 2025-08-10 | 83 | Data extraction / datasets | 17 |
+| 2025-06-09 | 58 | Tests / quality checks | 9 |
+| 2026-04-25 | 57 | Visual UI / layout | 15 |
+| 2025-06-14 | 55 | Branding / media assets | 17 |
+| 2026-04-19 | 52 | Feature additions | 12 |
+| 2025-06-08 | 48 | Visual UI / layout | 18 |
+| 2026-05-26 | 45 | Crawler / SEO / metadata | 22 |
+| 2026-05-01 | 43 | Feature additions | 8 |
+| 2025-05-31 | 43 | Visual UI / layout | 14 |
+| 2025-06-06 | 40 | Tests / quality checks | 10 |
+| 2026-05-14 | 39 | Feature additions | 8 |
+| 2025-06-13 | 39 | Visual UI / layout | 11 |
+| 2026-04-26 | 35 | Visual UI / layout | 7 |
+| 2025-08-09 | 35 | Data extraction / datasets | 16 |
+| 2026-05-15 | 29 | Branding / media assets | 6 |
+| 2024-06-19 | 27 | Analytics / charts | 5 |
+| 2026-04-18 | 26 | Pages deploy / domains | 5 |
+| 2025-05-30 | 26 | Feature additions | 8 |
+| 2023-05-15 | 26 | Feature additions | 6 |
 
-## Observations
+## Dominant-theme frequency by day
 
-- Some days are clearly dominated by a single theme, such as:
-  - 2026-05-25: crawler / seo
-  - 2026-05-15: website / deployment
-  - 2026-04-18 and 2026-04-26: feature build
-- Several busy days have a large "other" bucket, which suggests the categories could be refined further if needed.
-- The commit history shows bursts of focused work on specific themes rather than evenly mixed activity.
+| Dominant theme | Days |
+| --- | ---: |
+| Feature additions | 64 |
+| Visual UI / layout | 24 |
+| Content / writing | 21 |
+| Data extraction / datasets | 18 |
+| Initial setup / bootstrap | 18 |
+| Docs / instructions | 14 |
+| Branding / media assets | 13 |
+| Fixes / stabilization | 8 |
+| Analytics / charts | 7 |
+| Pages deploy / domains | 6 |
+| Dependencies / config | 6 |
+| AI / model experiments | 6 |
+| Cleanup / removal | 5 |
+| Refactor / organization | 4 |
+| Navigation / routing | 4 |
+| Tests / quality checks | 4 |
+| Maps / graph views | 3 |
+| Portfolio / showcase | 2 |
+| Crawler / SEO / metadata | 2 |
+| Games / interactive demos | 2 |
 
 ## Interpretation
 
-This tagging gives a coarse but useful view of what each day was mostly about. It suggests you often spend whole days on a single type of work, especially on deployment/polish, feature building, and crawler-related improvements.
+Feature additions dominate the largest number of active days. Visual layout, content, data work, and project bootstrap days also repeat often, which points to a rhythm of starting projects, shaping interfaces, adding content, and extracting or organizing data.
+
+The busiest days are more specialized than the full history. Several high-volume days are led by crawler/SEO work, data extraction, tests, branding, and interface layout. This suggests bursts of focused attention around a specific project surface or maintenance pass.

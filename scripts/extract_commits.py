@@ -38,6 +38,11 @@ FIELDS = [
     "additions",
     "deletions",
     "changed_files",
+    "message_theme",
+    "message_subtheme",
+    "commit_kind",
+    "theme_confidence",
+    "theme_source",
 ]
 
 

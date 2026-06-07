@@ -21,6 +21,10 @@ def main() -> None:
         check=True,
     )
     subprocess.run(
+        ["python3", str(ROOT / "tag_commits.py"), "--model", "gpt-5.4-mini", "--sync-web"],
+        check=True,
+    )
+    subprocess.run(
         ["python3", str(ROOT / "extract_deployments.py"), "--mode", args.mode, "--sync-web"],
         check=True,
     )

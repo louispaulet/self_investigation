@@ -6,6 +6,7 @@
 
 # Keep the directory itself
 !/data/.gitkeep
+!/data/commit_theme_audit.json
 !/data/commits_5y.tsv
 !/data/deployments_gh_pages.tsv
 !/data/repos.tsv

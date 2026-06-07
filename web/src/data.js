@@ -109,27 +109,17 @@ export function weekCounts(rows, timeZone = 'UTC', field = 'committer_date', met
   return [...counts.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([week, count]) => ({ week, [metricKey]: count }))
 }
 
-export function themeCounts(rows) {
-  const themes = [
-    ['Feature work', /\b(add|create|build|implement|new|initial|support)\b/i],
-    ['Fixes', /\b(fix|repair|bug|correct|resolve|patch)\b/i],
-    ['Design polish', /\b(style|design|ui|visual|polish|layout|responsive|chart)\b/i],
-    ['Data & analysis', /\b(data|analysis|stats|extract|load|parse|csv|tsv)\b/i],
-    ['Docs & copy', /\b(doc|readme|copy|text|about|instruction|note)\b/i],
-    ['Refactor & cleanup', /\b(refactor|clean|remove|split|rename|organize)\b/i],
-    ['Deploy & config', /\b(deploy|publish|config|vite|package|build|workflow)\b/i],
-  ]
-  const counts = new Map(themes.map(([name]) => [name, 0]))
-  counts.set('Other', 0)
+export function themeCounts(rows, { limit = 20, minCommits = 2 } = {}) {
+  const counts = new Map()
   for (const row of rows) {
-    const message = row.message || ''
-    const match = themes.find(([, pattern]) => pattern.test(message))
-    const key = match ? match[0] : 'Other'
+    const key = normalizedTheme(row.message_theme)
     counts.set(key, (counts.get(key) || 0) + 1)
   }
-  return [...counts.entries()]
+  const sorted = [...counts.entries()]
     .map(([theme, commits]) => ({ theme, commits }))
     .sort((a, b) => b.commits - a.commits || a.theme.localeCompare(b.theme))
+  const popular = sorted.filter((row) => row.commits >= minCommits).slice(0, limit)
+  return popular.length ? popular : sorted.slice(0, limit)
 }
 
 export function recentCommits(rows, count = 8, field = 'committer_date') {
@@ -145,6 +135,12 @@ function bedtimeBucketIndex(hour) {
 
 function pickDate(row, field = 'committer_date') {
   return row[field] || row.committer_date || row.author_date || row.authorDate || row.date
+}
+
+function normalizedTheme(value) {
+  const theme = (value || '').trim()
+  if (!theme || theme.toLowerCase() === 'other') return 'Unclassified'
+  return theme
 }
 
 function getHour(date, timeZone) {

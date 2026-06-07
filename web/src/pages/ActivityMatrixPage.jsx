@@ -120,7 +120,7 @@ function YearMatrix({ year, max }) {
               {year.days.map((day) => (
                 <span
                   key={day.date}
-                  title={`${day.label}: ${day.count} commits, day ${day.dayOfYear}`}
+                  title={`${day.label}: ${day.count} commits, ${day.dominantTheme}, day ${day.dayOfYear}`}
                   className="aspect-square rounded-[4px] border border-black/20"
                   style={{
                     gridColumn: day.week + 1,
@@ -147,23 +147,27 @@ function Metric({ label, value }) {
 }
 
 function buildActivity(rows) {
-  const counts = new Map()
+  const dayStats = new Map()
   for (const row of rows) {
     const key = localDateKey(row.committer_date, zone.key)
     if (!key) continue
-    counts.set(key, (counts.get(key) || 0) + 1)
+    const item = dayStats.get(key) || { count: 0, themes: new Map() }
+    const theme = normalizedTheme(row.message_theme)
+    item.count += 1
+    item.themes.set(theme, (item.themes.get(theme) || 0) + 1)
+    dayStats.set(key, item)
   }
 
-  const dataYears = [...new Set([...counts.keys()].map((key) => Number(key.slice(0, 4))))].sort((a, b) => a - b)
+  const dataYears = [...new Set([...dayStats.keys()].map((key) => Number(key.slice(0, 4))))].sort((a, b) => a - b)
   const latest = dataYears.at(-1) || new Date().getFullYear()
   const years = Array.from({ length: 5 }, (_, index) => latest - 4 + index)
 
   return {
-    years: years.map((year) => buildYear(year, counts)).reverse(),
+    years: years.map((year) => buildYear(year, dayStats)).reverse(),
   }
 }
 
-function buildYear(year, counts) {
+function buildYear(year, dayStats) {
   const start = new Date(Date.UTC(year, 0, 1))
   const length = isLeapYear(year) ? 366 : 365
   const firstWeekday = mondayIndex(start.getUTCDay())
@@ -171,12 +175,14 @@ function buildYear(year, counts) {
   const daysInYear = Array.from({ length }, (_, index) => {
     const date = new Date(Date.UTC(year, 0, index + 1))
     const dateKey = date.toISOString().slice(0, 10)
-    const count = counts.get(dateKey) || 0
+    const stats = dayStats.get(dateKey)
+    const count = stats?.count || 0
     return {
       date: dateKey,
       label: formatDay(date),
       dayOfYear: index + 1,
       count,
+      dominantTheme: count > 0 ? dominantTheme(stats.themes) : 'no commits',
       week: Math.floor((firstWeekday + index) / 7),
       weekday: mondayIndex(date.getUTCDay()),
     }
@@ -242,4 +248,14 @@ function formatDay(date) {
 
 function formatNumber(value) {
   return new Intl.NumberFormat('en-US').format(value || 0)
+}
+
+function dominantTheme(themes) {
+  return [...themes.entries()].sort(([aTheme, aCount], [bTheme, bCount]) => bCount - aCount || aTheme.localeCompare(bTheme))[0]?.[0] || 'Unclassified'
+}
+
+function normalizedTheme(value) {
+  const theme = (value || '').trim()
+  if (!theme || theme.toLowerCase() === 'other') return 'Unclassified'
+  return theme
 }

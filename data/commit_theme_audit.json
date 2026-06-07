@@ -1,0 +1,36 @@
+{
+  "model": "gpt-5.4-mini",
+  "rows": 2208,
+  "batches": 45,
+  "batch_size": 50,
+  "model_count": 2208,
+  "fallback_count": 0,
+  "source_counts": {
+    "model": 2208
+  },
+  "theme_counts": {
+    "Feature additions": 357,
+    "Visual UI / layout": 279,
+    "Docs / instructions": 178,
+    "Content / writing": 174,
+    "Branding / media assets": 149,
+    "Initial setup / bootstrap": 132,
+    "Data extraction / datasets": 119,
+    "Pages deploy / domains": 115,
+    "Fixes / stabilization": 109,
+    "Cleanup / removal": 79,
+    "Dependencies / config": 78,
+    "Refactor / organization": 74,
+    "Analytics / charts": 69,
+    "Tests / quality checks": 57,
+    "Navigation / routing": 57,
+    "Crawler / SEO / metadata": 54,
+    "AI / model experiments": 35,
+    "Maps / graph views": 29,
+    "Games / interactive demos": 29,
+    "Portfolio / showcase": 23,
+    "Search / filtering": 9,
+    "Unclassified": 3
+  },
+  "generated_at": "2026-06-07T14:14:29.725702Z"
+}

@@ -4,7 +4,7 @@ import ActivityBarChart from '../components/ActivityBarChart'
 import InsightCard from '../components/InsightCard'
 import SectionChart from '../components/SectionChart'
 import StatCard from '../components/StatCard'
-import { parseTsv } from '../data'
+import { parseTsv, themeCounts } from '../data'
 import { deploymentsSourcePath, reposSourcePath, sourcePath, zone } from '../utils/activity'
 
 const emptyStats = { commits: 0, deployments: 0, shippingRate: 0, activeRepos: 0, deployedRepos: 0 }
@@ -62,6 +62,7 @@ export default function ShippingPage() {
   const stats = useMemo(() => shippingStats(publicCommits, publicDeployments), [publicCommits, publicDeployments])
   const monthData = useMemo(() => monthlyFunnel(publicCommits, publicDeployments, zone.key), [publicCommits, publicDeployments])
   const repoData = useMemo(() => repoFunnel(publicRepoSet, publicCommits, publicDeployments), [publicRepoSet, publicCommits, publicDeployments])
+  const publicThemes = useMemo(() => themeCounts(publicCommits), [publicCommits])
   const topShippingRepos = useMemo(() => repoData.filter((row) => row.commits >= 5).sort(byShippingRate).slice(0, 10), [repoData])
   const lowShippingRepos = useMemo(() => repoData.filter((row) => row.commits >= 10 && row.shippingRate <= 10).sort(byCommitVolume).slice(0, 10), [repoData])
   const deployGapRepos = useMemo(() => repoData.filter((row) => row.medianDeployGapHours !== null).sort((a, b) => a.medianDeployGapHours - b.medianDeployGapHours || b.deployments - a.deployments).slice(0, 10), [repoData])
@@ -121,6 +122,12 @@ export default function ShippingPage() {
                 </ComposedChart>
               </ResponsiveContainer>
             ) : null}
+          </div>
+        </SectionChart>
+
+        <SectionChart title="Public commit themes" subtitle="Model-assisted categories for public repository commits" eyebrow="Top tags" status={status} error={error}>
+          <div className="h-[38rem] min-h-0 w-full min-w-0">
+            {chartsReady ? <ActivityBarChart data={publicThemes} layout="vertical" xKey="commits" yKey="theme" xAxisProps={{ type: 'number' }} yAxisProps={{ width: 220, interval: 0, tick: { width: 220, textAnchor: 'end' } }} barRadius={[0, 8, 8, 0]} colorOffset={5} /> : null}
           </div>
         </SectionChart>
 

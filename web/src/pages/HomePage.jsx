@@ -32,6 +32,7 @@ export default function HomePage() {
   const [status, setStatus] = useState('loading')
   const [error, setError] = useState('')
   const [normalizeRepos, setNormalizeRepos] = useState(false)
+  const [chartsReady, setChartsReady] = useState(false)
   const [now] = useState(() => Date.now())
 
   useEffect(() => {
@@ -42,6 +43,12 @@ export default function HomePage() {
       .catch((err) => { if (!alive) return; setError(`Failed to load ${sourcePath}: ${err.message}`); setStatus('error') })
     return () => { alive = false }
   }, [])
+
+  useEffect(() => {
+    if (status !== 'ready') return undefined
+    const frame = window.requestAnimationFrame(() => setChartsReady(true))
+    return () => window.cancelAnimationFrame(frame)
+  }, [status])
 
   const hourData = useMemo(() => hourCounts(rows, zone.key), [rows])
   const dayData = useMemo(() => dayCounts(rows, zone.key), [rows])
@@ -85,7 +92,7 @@ export default function HomePage() {
         <div className="grid gap-8 xl:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)]">
           <SectionChart title="Activity over time" subtitle="Monthly commits from the five-year export" eyebrow="Timeline" status={status} error={error}>
             <div className="h-80 w-full">
-              <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+              {chartsReady ? <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                 <AreaChart data={monthData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                   <defs>
                     <linearGradient id="commitArea" x1="0" y1="0" x2="0" y2="1">
@@ -99,7 +106,7 @@ export default function HomePage() {
                   <Tooltip {...tooltipProps} />
                   <Area type="monotone" dataKey="commits" stroke="#5eead4" strokeWidth={2} fill="url(#commitArea)" />
                 </AreaChart>
-              </ResponsiveContainer>
+              </ResponsiveContainer> : null}
             </div>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
               <InsightCard label="Most active month" value={maxMonth?.month || '...'} detail={`${maxMonth?.commits || 0} commits`} />
@@ -109,37 +116,37 @@ export default function HomePage() {
 
           <SectionChart title="Annual shape" subtitle="Commit volume by year" eyebrow="Years" status={status} error={error}>
             <div className="h-80 w-full">
-              <ActivityBarChart data={yearData} xKey="year" yKey="commits" barRadius={[8, 8, 0, 0]} colorOffset={1} margin={{ top: 10, right: 10, left: 0, bottom: 0 }} />
+              {chartsReady ? <ActivityBarChart data={yearData} xKey="year" yKey="commits" barRadius={[8, 8, 0, 0]} colorOffset={1} margin={{ top: 10, right: 10, left: 0, bottom: 0 }} /> : null}
             </div>
           </SectionChart>
         </div>
 
         <SectionChart title="Repository activity" subtitle="Repositories receiving the most commits" eyebrow="Top 10" status={status} error={error}>
           <label className="mb-4 flex items-center gap-2 text-sm text-slate-200"><input type="checkbox" checked={normalizeRepos} onChange={(event) => setNormalizeRepos(event.target.checked)} className="h-4 w-4 rounded border-slate-500 bg-slate-900 text-teal-400 accent-teal-400" />Remove days without commits</label>
-          <div className="h-[30rem] w-full"><ActivityBarChart data={repoChartData} layout="vertical" xKey="commits" yKey="repoLabel" xAxisProps={{ type: 'number' }} yAxisProps={{ width: 170 }} barRadius={[0, 8, 8, 0]} colorOffset={0} /></div>
+          <div className="h-[30rem] w-full">{chartsReady ? <ActivityBarChart data={repoChartData} layout="vertical" xKey="commits" yKey="repoLabel" xAxisProps={{ type: 'number' }} yAxisProps={{ width: 170 }} barRadius={[0, 8, 8, 0]} colorOffset={0} /> : null}</div>
         </SectionChart>
 
         <div className="grid gap-8 xl:grid-cols-2">
           <SectionChart title="Weekly cadence" subtitle="Commit volume by weekday" eyebrow="Paris" status={status} error={error}>
-            <div className="h-72 w-full"><ActivityBarChart data={days.map((day, i) => ({ day, commits: dayData[i] }))} xKey="day" yKey="commits" barRadius={[8, 8, 0, 0]} colorOffset={2} margin={{ top: 10, right: 10, left: 0, bottom: 0 }} /></div>
+            <div className="h-72 w-full">{chartsReady ? <ActivityBarChart data={days.map((day, i) => ({ day, commits: dayData[i] }))} xKey="day" yKey="commits" barRadius={[8, 8, 0, 0]} colorOffset={2} margin={{ top: 10, right: 10, left: 0, bottom: 0 }} /> : null}</div>
             <div className="mt-4"><InsightCard label="Most active day" value={days[bestDay]} detail={`${Math.max(...dayData)} commits`} /></div>
           </SectionChart>
 
           <SectionChart title="Time of day" subtitle="Commit volume by hour" eyebrow="Paris" status={status} error={error}>
-            <div className="h-72 w-full"><ActivityBarChart data={hours.map((hour, i) => ({ hour, commits: hourData[i] }))} xKey="hour" yKey="commits" barRadius={[6, 6, 0, 0]} colorOffset={3} margin={{ top: 10, right: 10, left: 0, bottom: 40 }} /></div>
+            <div className="h-72 w-full">{chartsReady ? <ActivityBarChart data={hours.map((hour, i) => ({ hour, commits: hourData[i] }))} xKey="hour" yKey="commits" barRadius={[6, 6, 0, 0]} colorOffset={3} margin={{ top: 10, right: 10, left: 0, bottom: 40 }} /> : null}</div>
             <div className="mt-4"><InsightCard label="Most active hour" value={`${String(bestHour).padStart(2, '0')}:00`} detail={`Paris commits: ${hourData[bestHour]}`} /></div>
           </SectionChart>
         </div>
 
         <div className="grid gap-8 xl:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
           <SectionChart title="Evening and night" subtitle="Commit activity from late day into early morning" eyebrow="Paris, 20:00-03:00" status={status} error={error}>
-            <div className="h-72 w-full"><ActivityBarChart data={bedtimeHours.map((hour, i) => ({ hour, commits: bedtimeData[i] }))} xKey="hour" yKey="commits" barRadius={[6, 6, 0, 0]} colorOffset={4} margin={{ top: 10, right: 10, left: 0, bottom: 40 }} /></div>
+            <div className="h-72 w-full">{chartsReady ? <ActivityBarChart data={bedtimeHours.map((hour, i) => ({ hour, commits: bedtimeData[i] }))} xKey="hour" yKey="commits" barRadius={[6, 6, 0, 0]} colorOffset={4} margin={{ top: 10, right: 10, left: 0, bottom: 40 }} /> : null}</div>
             <div className="mt-4"><InsightCard label="Night window" value={bedtimeTotal} detail="Combined activity from 20:00 to 03:00 Paris time" /></div>
           </SectionChart>
 
           <SectionChart title="Last 52 weeks" subtitle="Recent weekly volume in a compact line" eyebrow="Weeks" status={status} error={error}>
             <div className="h-72 w-full">
-              <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+              {chartsReady ? <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                 <LineChart data={weekData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                   <CartesianGrid stroke="rgba(148,163,184,0.14)" vertical={false} />
                   <XAxis dataKey="week" tickLine={false} axisLine={false} minTickGap={28} />
@@ -147,13 +154,13 @@ export default function HomePage() {
                   <Tooltip {...tooltipProps} />
                   <Line type="monotone" dataKey="commits" stroke="#f59e0b" strokeWidth={2.5} dot={false} />
                 </LineChart>
-              </ResponsiveContainer>
+              </ResponsiveContainer> : null}
             </div>
           </SectionChart>
         </div>
 
-        <SectionChart title="Message themes" subtitle="Keyword categories computed from commit messages" eyebrow="Themes" status={status} error={error}>
-          <div className="h-[30rem] w-full"><ActivityBarChart data={themes} layout="vertical" xKey="commits" yKey="theme" xAxisProps={{ type: 'number' }} yAxisProps={{ width: 160, interval: 0, tick: { width: 160, textAnchor: 'end' } }} barRadius={[0, 8, 8, 0]} colorOffset={5} /></div>
+        <SectionChart title="Message themes" subtitle="Model-assisted categories from commit messages" eyebrow="Top tags" status={status} error={error}>
+          <div className="h-[38rem] w-full">{chartsReady ? <ActivityBarChart data={themes} layout="vertical" xKey="commits" yKey="theme" xAxisProps={{ type: 'number' }} yAxisProps={{ width: 220, interval: 0, tick: { width: 220, textAnchor: 'end' } }} barRadius={[0, 8, 8, 0]} colorOffset={5} /> : null}</div>
         </SectionChart>
 
         <section className="rounded-2xl border border-white/10 bg-white/[0.05] p-6">
@@ -169,7 +176,10 @@ export default function HomePage() {
               <a key={`${row.repo}-${row.sha}`} href={row.url} className="grid gap-2 rounded-xl border border-white/10 bg-black/15 p-4 hover:border-teal-200/40 sm:grid-cols-[1fr_auto]">
                 <span>
                   <span className="block text-sm font-semibold text-white">{row.message || 'Untitled commit'}</span>
-                  <span className="mt-1 block text-sm text-slate-300">{row.repo}</span>
+                  <span className="mt-1 flex flex-wrap items-center gap-2 text-sm text-slate-300">
+                    <span>{row.repo}</span>
+                    <span className="rounded-md border border-teal-200/20 bg-teal-300/10 px-2 py-0.5 text-xs font-medium text-teal-100">{row.message_theme || 'Unclassified'}</span>
+                  </span>
                 </span>
                 <span className="text-sm text-slate-400">{formatDate(row.committer_date)}</span>
               </a>

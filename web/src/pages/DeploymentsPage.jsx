@@ -17,6 +17,7 @@ export default function DeploymentsPage() {
   const [rows, setRows] = useState([])
   const [status, setStatus] = useState('loading')
   const [error, setError] = useState('')
+  const [chartsReady, setChartsReady] = useState(false)
   const [now] = useState(() => Date.now())
 
   useEffect(() => {
@@ -40,6 +41,12 @@ export default function DeploymentsPage() {
       alive = false
     }
   }, [])
+
+  useEffect(() => {
+    if (status !== 'ready') return undefined
+    const frame = window.requestAnimationFrame(() => setChartsReady(true))
+    return () => window.cancelAnimationFrame(frame)
+  }, [status])
 
   const successfulRows = useMemo(() => rows.filter((row) => row.deploy_at), [rows])
   const stats = useMemo(() => deploymentStats(successfulRows, zone.key), [successfulRows])
@@ -92,7 +99,7 @@ export default function DeploymentsPage() {
         <div className="grid gap-8 xl:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)]">
           <SectionChart title="Deployments over time" subtitle="Monthly successful GitHub Pages deployments" eyebrow="Timeline" status={status} error={error}>
             <div className="h-80 w-full">
-              <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+              {chartsReady ? <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                 <AreaChart data={monthData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                   <defs>
                     <linearGradient id="deploymentArea" x1="0" y1="0" x2="0" y2="1">
@@ -106,7 +113,7 @@ export default function DeploymentsPage() {
                   <Tooltip {...tooltipProps} />
                   <Area type="monotone" dataKey="deployments" stroke="#7dd3fc" strokeWidth={2} fill="url(#deploymentArea)" />
                 </AreaChart>
-              </ResponsiveContainer>
+              </ResponsiveContainer> : null}
             </div>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
               <InsightCard label="Most active month" value={maxMonth?.month || '...'} detail={`${maxMonth?.deployments || 0} deployments`} />
@@ -116,28 +123,28 @@ export default function DeploymentsPage() {
 
           <SectionChart title="Annual shape" subtitle="Successful deployments by year" eyebrow="Years" status={status} error={error}>
             <div className="h-80 w-full">
-              <ActivityBarChart data={yearData} xKey="year" yKey="deployments" dataKey="deployments" barRadius={[8, 8, 0, 0]} colorOffset={2} margin={{ top: 10, right: 10, left: 0, bottom: 0 }} />
+              {chartsReady ? <ActivityBarChart data={yearData} xKey="year" yKey="deployments" dataKey="deployments" barRadius={[8, 8, 0, 0]} colorOffset={2} margin={{ top: 10, right: 10, left: 0, bottom: 0 }} /> : null}
             </div>
           </SectionChart>
         </div>
 
         <SectionChart title="Repository deployments" subtitle="Repositories with the most successful Pages deployments" eyebrow="Top 10" status={status} error={error}>
           <div className="h-[30rem] w-full">
-            <ActivityBarChart data={repoData} layout="vertical" xKey="deployments" yKey="repoLabel" dataKey="deployments" xAxisProps={{ type: 'number' }} yAxisProps={{ width: 170 }} barRadius={[0, 8, 8, 0]} colorOffset={2} />
+            {chartsReady ? <ActivityBarChart data={repoData} layout="vertical" xKey="deployments" yKey="repoLabel" dataKey="deployments" xAxisProps={{ type: 'number' }} yAxisProps={{ width: 170 }} barRadius={[0, 8, 8, 0]} colorOffset={2} /> : null}
           </div>
         </SectionChart>
 
         <div className="grid gap-8 xl:grid-cols-2">
           <SectionChart title="Weekly cadence" subtitle="Successful deployments by weekday" eyebrow="Paris" status={status} error={error}>
             <div className="h-72 w-full">
-              <ActivityBarChart data={days.map((day, i) => ({ day, deployments: dayData[i] }))} xKey="day" yKey="deployments" dataKey="deployments" barRadius={[8, 8, 0, 0]} colorOffset={3} margin={{ top: 10, right: 10, left: 0, bottom: 0 }} />
+              {chartsReady ? <ActivityBarChart data={days.map((day, i) => ({ day, deployments: dayData[i] }))} xKey="day" yKey="deployments" dataKey="deployments" barRadius={[8, 8, 0, 0]} colorOffset={3} margin={{ top: 10, right: 10, left: 0, bottom: 0 }} /> : null}
             </div>
             <div className="mt-4"><InsightCard label="Most active day" value={days[bestDay]} detail={`${Math.max(...dayData)} deployments`} /></div>
           </SectionChart>
 
           <SectionChart title="Time of day" subtitle="Successful deployments by hour" eyebrow="Paris" status={status} error={error}>
             <div className="h-72 w-full">
-              <ActivityBarChart data={hours.map((hour, i) => ({ hour, deployments: hourData[i] }))} xKey="hour" yKey="deployments" dataKey="deployments" barRadius={[6, 6, 0, 0]} colorOffset={4} margin={{ top: 10, right: 10, left: 0, bottom: 40 }} />
+              {chartsReady ? <ActivityBarChart data={hours.map((hour, i) => ({ hour, deployments: hourData[i] }))} xKey="hour" yKey="deployments" dataKey="deployments" barRadius={[6, 6, 0, 0]} colorOffset={4} margin={{ top: 10, right: 10, left: 0, bottom: 40 }} /> : null}
             </div>
             <div className="mt-4"><InsightCard label="Most active hour" value={`${String(bestHour).padStart(2, '0')}:00`} detail={`Paris deployments: ${hourData[bestHour]}`} /></div>
           </SectionChart>
@@ -145,7 +152,7 @@ export default function DeploymentsPage() {
 
         <SectionChart title="Last 52 weeks" subtitle="Recent deployment volume in a compact line" eyebrow="Weeks" status={status} error={error}>
           <div className="h-72 w-full">
-            <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+            {chartsReady ? <ResponsiveContainer width="100%" height="100%" minWidth={0}>
               <LineChart data={weekData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                 <CartesianGrid stroke="rgba(148,163,184,0.14)" vertical={false} />
                 <XAxis dataKey="week" tickLine={false} axisLine={false} minTickGap={28} />
@@ -153,7 +160,7 @@ export default function DeploymentsPage() {
                 <Tooltip {...tooltipProps} />
                 <Line type="monotone" dataKey="deployments" stroke="#84cc16" strokeWidth={2.5} dot={false} />
               </LineChart>
-            </ResponsiveContainer>
+            </ResponsiveContainer> : null}
           </div>
         </SectionChart>
 

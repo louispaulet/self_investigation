@@ -1,79 +1,46 @@
 # Commit Message Themes
 
-I grouped the 506 commit messages from the last 3 months into 10 representative categories.
+This analysis tags the 2,208 commits in `data/commits_5y.tsv` with a fixed message taxonomy. The labels were generated with `scripts/tag_commits.py` using `gpt-5.4-mini`, validated against a structured schema, and written into the commit TSV as `message_theme`, `message_subtheme`, `commit_kind`, `theme_confidence`, and `theme_source`.
 
-## Categories
+## Raw measurements
 
-1. **Docs & instructions**
-   - README changes
-   - contributor docs
-   - agent workflow instructions
-   - project instructions
+| Theme | Commits |
+| --- | ---: |
+| Feature additions | 357 |
+| Visual UI / layout | 279 |
+| Docs / instructions | 178 |
+| Content / writing | 174 |
+| Branding / media assets | 149 |
+| Initial setup / bootstrap | 132 |
+| Data extraction / datasets | 119 |
+| Pages deploy / domains | 115 |
+| Fixes / stabilization | 109 |
+| Cleanup / removal | 79 |
+| Dependencies / config | 78 |
+| Refactor / organization | 74 |
+| Analytics / charts | 69 |
+| Tests / quality checks | 57 |
+| Navigation / routing | 57 |
+| Crawler / SEO / metadata | 54 |
+| AI / model experiments | 35 |
+| Maps / graph views | 29 |
+| Games / interactive demos | 29 |
+| Portfolio / showcase | 23 |
+| Search / filtering | 9 |
+| Unclassified | 3 |
 
-2. **Initial setup / project bootstrap**
-   - initial commit
-   - create project structure
-   - first scaffolding steps
+The old `Other` bucket is gone. The model tagged every row directly, with no rule fallback needed. Three commits remain `Unclassified`; all three are branch merge messages without enough message detail to infer a theme.
 
-3. **Website / Pages / deployment**
-   - CNAME
-   - GitHub Pages
-   - HashRouter
-   - dashboard navigation
-   - React site updates
+## Fine-grained columns
 
-4. **Visual polish / UI tweaks**
-   - favicon updates
-   - dropdown/display changes
-   - copy tweaks
-   - icon changes
+The dashboard plots major themes to keep the chart readable. The TSV also keeps `message_subtheme` for row-level inspection. These subthemes capture smaller units of work such as favicon changes, CNAME/domain edits, crawler metadata passes, tests, README updates, graph navigation, model experiments, and deployment refreshes.
 
-5. **Crawler / SEO / metadata**
-   - crawler improvements
-   - SEO metadata
-   - crawl-related changes
+The tag source is recorded in `theme_source`. In the current run all 2,208 rows have `theme_source=model`.
 
-6. **Monitoring / discovery / live dashboards**
-   - monitor pages
-   - live project discovery
-   - project tiles
-   - navigation dashboards
+## Interpretation
 
-7. **Data / content additions**
-   - stats
-   - about page copy
-   - generated content
-   - declarations and listings
+The largest category is feature additions, followed by interface/layout work. This suggests a pattern of building usable pieces, then spending substantial time on the way those pieces read, behave, and present themselves.
 
-8. **Cleanup / removal / refactor**
-   - remove
-   - delete
-   - ignore files
-   - reorder / refine structure
+Documentation, content, branding, bootstrap, data extraction, and deployment work all appear as meaningful repeated activities. The activity is spread across product surfaces, source data, public presentation, and project maintenance rather than concentrated in one narrow kind of commit.
 
-9. **Bug fixes / iterative improvements**
-   - improve
-   - fix
-   - patch-style changes
-   - small adjustments
-
-10. **Feature builds / new tools**
-    - build new frontend pieces
-    - create new functionality
-    - add a new module or workflow
-
-## Notes
-
-These categories are intentionally broad and representative rather than perfectly strict. Many commit messages could fit more than one group, so the goal here is to capture the dominant theme.
-
-## Day-level tagging approach
-
-For each day, every commit can be tagged into one of the categories above based on its message. This makes it possible to study:
-
-- which themes dominate on each day
-- whether some days are mostly cleanup vs. new features
-- whether weekends are more exploratory or more maintenance-oriented
-
-## Next step
-
-Build a per-day table with the day, commit count, and category distribution.
+These tags describe observable commit-message traces. They should be read as activity signals, not as a complete record of intent.
