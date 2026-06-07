@@ -9,6 +9,7 @@ The app reads TSV files from `public/data`:
 - `commits_5y.tsv` for commit charts
 - `deployments_gh_pages.tsv` for GitHub Pages deployment charts
 - `repos.tsv` for repository context
+- `average_hour_stories.json` for static story cards on the average-hour page
 
 Refresh data from the repository root with:
 
@@ -26,8 +27,14 @@ npm run dev
 ## Validation and deployment
 
 ```sh
-npm run lint
+npm run test
 npm run build
 cd ..
 make deploy
+```
+
+Regenerate only the average-hour story data from the repository root with:
+
+```sh
+make stories
 ```

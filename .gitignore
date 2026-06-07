@@ -7,10 +7,12 @@
 # Keep the directory itself
 !/data/.gitkeep
 !/data/commit_theme_audit.json
+!/data/average_hour_stories.json
 !/data/commits_5y.tsv
 !/data/deployments_gh_pages.tsv
 !/data/repos.tsv
 !/web/public/data/.gitkeep
+!/web/public/data/average_hour_stories.json
 !/web/public/data/commits_5y.tsv
 !/web/public/data/deployments_gh_pages.tsv
 !/web/public/data/recent_commits.tsv

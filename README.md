@@ -21,6 +21,7 @@ Analyze your GitHub history to understand:
   - possible bedtime patterns
   - day-of-week patterns
   - frequency by week, month, and year
+  - minute and second patterns inside the average hour
 
 ## Approach
 
@@ -49,12 +50,20 @@ python3 scripts/master.py --mode iterative
 The committed dashboard data lives in `data/commits_5y.tsv` and is mirrored to
 `web/public/data/commits_5y.tsv` so the website can parse it in the browser. GitHub
 Pages deployment data lives in `data/deployments_gh_pages.tsv` and is mirrored to
-`web/public/data/deployments_gh_pages.tsv`. Private repositories and forks are excluded.
+`web/public/data/deployments_gh_pages.tsv`. Average-hour story cards live in
+`data/average_hour_stories.json` and are mirrored to
+`web/public/data/average_hour_stories.json`. Private repositories and forks are excluded.
 
 Refresh only GitHub Pages deployments with:
 
 ```sh
 python3 scripts/extract_deployments.py --mode iterative --sync-web
+```
+
+Regenerate only the average-hour story artifact with:
+
+```sh
+make stories
 ```
 
 Run the website locally with:
@@ -73,6 +82,8 @@ make deploy
 
 - Distinguish between commit author time, commit time, push time, and PR merge time.
 - Distinguish between deployment creation time and successful deployment status time.
+- The `/average-hour` page folds all commits and successful Pages deployments into one imagined hour. Minute and second charts ignore timestamp hour and day.
+- Seasonal and half-year comparisons on `/average-hour` use Europe/Paris calendar months only to form comparison groups.
 - Keep raw data and derived analysis separate.
 - Document any assumptions and limitations clearly.
 

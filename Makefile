@@ -1,10 +1,14 @@
-.PHONY: up test build deploy
+.PHONY: up stories test build deploy
 
 up:
 	cd web && npm run dev
 
+stories:
+	python3 scripts/build_average_hour_stories.py --sync-web
+
 test:
-	cd web && npm run lint
+	python3 -m unittest discover -s tests
+	cd web && npm run test
 
 build:
 	cd web && npm run build

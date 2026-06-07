@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node -e \"require('fs').copyFileSync('dist/index.html','dist/404.html')\"",
     "lint": "eslint .",
+    "test:unit": "node --test src/**/*.test.js",
+    "test": "npm run test:unit && npm run lint",
     "preview": "vite preview"
   },
   "dependencies": {

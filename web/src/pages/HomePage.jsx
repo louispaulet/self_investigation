@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Area, AreaChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import ActivityBarChart from '../components/ActivityBarChart'
 import InsightCard from '../components/InsightCard'
@@ -91,6 +92,14 @@ export default function HomePage() {
           </div>
           <SummarySection recent24h={recent24h} recent7d={recent7d} recent30d={recent30d} stats={status === 'ready' ? stats : emptyStats} />
         </div>
+
+        <Link to="/average-hour" className="rounded-2xl border border-rose-200/20 bg-rose-200/[0.06] p-5 transition hover:border-rose-200/45">
+          <p className="text-sm uppercase tracking-[0.28em] text-rose-100/70">Average hour</p>
+          <h2 className="mt-2 text-xl font-semibold text-white">Study the minute hand across every commit and deployment</h2>
+          <p className="mt-2 max-w-3xl text-sm leading-7 text-rose-50/80">
+            The new view folds five years into one imagined hour, then compares minutes, seconds, seasons, and the actual hours where commit messages gathered into stories.
+          </p>
+        </Link>
 
         <div className="grid gap-8 xl:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)]">
           <SectionChart title="Activity over time" subtitle="Monthly commits from the five-year export" eyebrow="Timeline" status={status} error={error}>

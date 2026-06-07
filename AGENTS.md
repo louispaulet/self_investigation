@@ -17,8 +17,9 @@ This project is for investigating your GitHub activity using the local `gh` CLI.
   - time of day you push most
   - time of day you merge PRs
   - possible bedtime patterns
-  - day-of-week patterns
-  - frequency by week, month, and year
+- day-of-week patterns
+- frequency by week, month, and year
+- minute-of-hour and second-of-minute patterns across the five-year export
 
 ## Working style
 
@@ -40,6 +41,7 @@ This project is for investigating your GitHub activity using the local `gh` CLI.
 - PR history and merge timestamps
 - commit messages and author timestamps
 - GitHub Pages configuration and deployment statuses
+- average-hour derived story artifacts in `data/average_hour_stories.json`
 
 ## Notes
 
@@ -48,3 +50,4 @@ This project is for investigating your GitHub activity using the local `gh` CLI.
 - Be careful to distinguish deployment creation time from successful deployment status time.
 - When presenting results, separate raw measurements from interpretations.
 - Read `tone_of_voice.md` before writing or revising app copy.
+- For the average-hour page, minute and second charts intentionally ignore the timestamp hour and day. Use Europe/Paris calendar months only for season and half-year comparison groups.
