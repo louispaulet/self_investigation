@@ -1,0 +1,358 @@
+{
+  "generated_at": "2026-06-07T22:38:07.646343Z",
+  "time_zone": "Europe/Paris",
+  "model": "gpt-5.4-mini",
+  "model_error": "",
+  "source_counts": {
+    "commits": 2208,
+    "deployments": 567,
+    "events": 2775
+  },
+  "records": {
+    "busiest_minute_of_hour": {
+      "minute": 18,
+      "commit_count": 73
+    },
+    "busiest_real_minute": {
+      "key": "2026-05-25T22:18:00+02:00",
+      "commit_count": 20,
+      "deployment_count": 1,
+      "event_count": 21,
+      "repos": [
+        "louispaulet/benchmark_experiments",
+        "louispaulet/bernard_generator",
+        "louispaulet/crossref_news",
+        "louispaulet/face_emotion_in_browser_demo",
+        "louispaulet/fraud_tinder",
+        "louispaulet/generative_website"
+      ],
+      "messages": [
+        "Improve crawler SEO metadata"
+      ]
+    },
+    "busiest_real_hour": {
+      "key": "2026-05-26T01:00:00+02:00",
+      "commit_count": 40,
+      "deployment_count": 4,
+      "event_count": 44,
+      "repos": [
+        "louispaulet/self_investigation"
+      ],
+      "messages": [
+        "Add analysis recap",
+        "Add weekday analysis",
+        "Add time analysis",
+        "Add message themes",
+        "Add day tags"
+      ]
+    },
+    "busiest_real_day": {
+      "key": "2025-08-10",
+      "commit_count": 103,
+      "deployment_count": 0,
+      "event_count": 103,
+      "repos": [
+        "louispaulet/hatvp-w-codex"
+      ],
+      "messages": [
+        "Add stock analysis scripts and datasets",
+        "Add test for index filtering",
+        "feat: store extracted personal info",
+        "Merge pull request #5 from louispaulet/codex/run-extract_personal_info.py-and-save-results",
+        "Merge pull request #4 from louispaulet/codex/analyze-and-filter-stock-data"
+      ]
+    }
+  },
+  "stories": [
+    {
+      "key": "2026-05-26T01:00:00+02:00",
+      "first_at": "2026-05-26T01:02:11+02:00",
+      "last_at": "2026-05-26T01:59:27+02:00",
+      "title": "Early-night analysis work on self_investigation",
+      "summary": "At 01:00 in Paris time, the self_investigation repository logged 40 commits and 4 deployments. The messages centered on analysis recap, weekday analysis, time analysis, message themes, day tags, clean data files, a web app, and showing UTC and Paris. The theme counts place Pages deploy / domains at 14 and Analytics / charts at 12, alongside smaller amounts of Content / writing, Visual UI / layout, and Feature additions.",
+      "story_source": "model",
+      "commit_count": 40,
+      "deployment_count": 4,
+      "event_count": 44,
+      "repos": [
+        "louispaulet/self_investigation"
+      ],
+      "repo_counts": {
+        "louispaulet/self_investigation": 44
+      },
+      "messages": [
+        "Add analysis recap",
+        "Add weekday analysis",
+        "Add time analysis",
+        "Add message themes",
+        "Add day tags",
+        "Clean data files",
+        "Add web app",
+        "Show utc and paris"
+      ],
+      "themes": {
+        "Pages deploy / domains": 14,
+        "Analytics / charts": 12,
+        "Content / writing": 5,
+        "Visual UI / layout": 4,
+        "Feature additions": 2
+      },
+      "links": [
+        "https://github.com/louispaulet/self_investigation/commit/ca3fc73dc9f420565382fe709f5057701b858182",
+        "https://github.com/louispaulet/self_investigation/commit/52668c378aea1a0840a40a985b0b0e947e0258d3",
+        "https://github.com/louispaulet/self_investigation/commit/f11c3b5e2d0f1ca1c21b8ffa9171527fc46811e5",
+        "https://github.com/louispaulet/self_investigation/commit/e66a0c80261d2e7f0b5ecd6878b3bebaac2df28c",
+        "https://github.com/louispaulet/self_investigation/commit/04c462461476a68e5979b64cf3aa624fc18fabe6",
+        "https://github.com/louispaulet/self_investigation/commit/a4eeb3dc606653432f7fbf1132d2d9581bd50220"
+      ]
+    },
+    {
+      "key": "2026-05-26T18:00:00+02:00",
+      "first_at": "2026-05-26T18:00:49+02:00",
+      "last_at": "2026-05-26T18:57:46+02:00",
+      "title": "Evening deployment burst across portfolio projects",
+      "summary": "At 18:00 in Paris time, 27 commits and 27 deployments landed across benchmark_experiments, bernard_generator, crossref_news, face_emotion_in_browser_demo, and fraud_tinder. The messages mentioned refresh timestamps, refreshed deployed bundles, the Self Investigation project, hidden crawler fallback content, and an activity matrix page. The theme counts are led by Crawler / SEO / metadata, with smaller amounts of Analytics / charts, Pages deploy / domains, and Portfolio / showcase.",
+      "story_source": "model",
+      "commit_count": 27,
+      "deployment_count": 27,
+      "event_count": 54,
+      "repos": [
+        "louispaulet/benchmark_experiments",
+        "louispaulet/bernard_generator",
+        "louispaulet/crossref_news",
+        "louispaulet/face_emotion_in_browser_demo",
+        "louispaulet/fraud_tinder",
+        "louispaulet/generative_website",
+        "louispaulet/gpt_recommender",
+        "louispaulet/groq_funny_stuff",
+        "louispaulet/hotpepperz",
+        "louispaulet/images_on_a_map",
+        "louispaulet/louispaulet.github.io",
+        "louispaulet/menu_display_2",
+        "louispaulet/mnist_client",
+        "louispaulet/monitor_live_projects",
+        "louispaulet/ponzi_simulator",
+        "louispaulet/pretty_cats",
+        "louispaulet/ratp_time",
+        "louispaulet/seamless-tester",
+        "louispaulet/self_investigation",
+        "louispaulet/simple_city_builder",
+        "louispaulet/simple_game_of_life",
+        "louispaulet/timeline_frontend",
+        "louispaulet/wikipedia-curiosity-cabinet"
+      ],
+      "repo_counts": {
+        "louispaulet/self_investigation": 7,
+        "louispaulet/louispaulet.github.io": 4,
+        "louispaulet/images_on_a_map": 4,
+        "louispaulet/wikipedia-curiosity-cabinet": 2,
+        "louispaulet/simple_city_builder": 2,
+        "louispaulet/ponzi_simulator": 2
+      },
+      "messages": [
+        "Show refresh timestamp",
+        "Refresh deployed bundle",
+        "Add Self Investigation project",
+        "Hide crawler fallback content",
+        "Add activity matrix page"
+      ],
+      "themes": {
+        "Crawler / SEO / metadata": 22,
+        "Analytics / charts": 2,
+        "Pages deploy / domains": 2,
+        "Portfolio / showcase": 1
+      },
+      "links": [
+        "http://selfinvest.thefrenchartist.dev/",
+        "https://github.com/louispaulet/self_investigation/commit/cafd9920cf87ad9014cd27fdde6e4f8ed5624cd4",
+        "https://github.com/louispaulet/self_investigation/commit/c6f1e04358d7f7a1ddbce72171073663201ca019",
+        "https://github.com/louispaulet/louispaulet.github.io/commit/25f218f6bd4a61e728a257ae9182dc9a4d8a1b07",
+        "http://wunderwiki.thefrenchartist.dev/",
+        "https://facemap.thefrenchartist.dev/"
+      ]
+    },
+    {
+      "key": "2026-05-25T22:00:00+02:00",
+      "first_at": "2026-05-25T22:15:41+02:00",
+      "last_at": "2026-05-25T22:18:37+02:00",
+      "title": "",
+      "summary": "",
+      "story_source": "model",
+      "commit_count": 22,
+      "deployment_count": 22,
+      "event_count": 44,
+      "repos": [
+        "louispaulet/benchmark_experiments",
+        "louispaulet/bernard_generator",
+        "louispaulet/crossref_news",
+        "louispaulet/face_emotion_in_browser_demo",
+        "louispaulet/fraud_tinder",
+        "louispaulet/generative_website",
+        "louispaulet/gpt_recommender",
+        "louispaulet/groq_funny_stuff",
+        "louispaulet/hotpepperz",
+        "louispaulet/images_on_a_map",
+        "louispaulet/louispaulet.github.io",
+        "louispaulet/menu_display_2",
+        "louispaulet/mnist_client",
+        "louispaulet/monitor_live_projects",
+        "louispaulet/ponzi_simulator",
+        "louispaulet/pretty_cats",
+        "louispaulet/ratp_time",
+        "louispaulet/seamless-tester",
+        "louispaulet/simple_city_builder",
+        "louispaulet/simple_game_of_life",
+        "louispaulet/timeline_frontend",
+        "louispaulet/wikipedia-curiosity-cabinet"
+      ],
+      "repo_counts": {
+        "louispaulet/images_on_a_map": 3,
+        "louispaulet/timeline_frontend": 2,
+        "louispaulet/wikipedia-curiosity-cabinet": 2,
+        "louispaulet/simple_city_builder": 2,
+        "louispaulet/ponzi_simulator": 2,
+        "louispaulet/pretty_cats": 2
+      },
+      "messages": [
+        "Improve crawler SEO metadata"
+      ],
+      "themes": {
+        "Crawler / SEO / metadata": 22
+      },
+      "links": [
+        "http://timeline.thefrenchartist.dev/",
+        "http://wunderwiki.thefrenchartist.dev/",
+        "https://facemap.thefrenchartist.dev/",
+        "http://city-builder.thefrenchartist.dev/",
+        "http://ponzi.thefrenchartist.dev/",
+        "https://pretty-cats.thefrenchartist.dev/"
+      ]
+    },
+    {
+      "key": "2025-06-14T01:00:00+02:00",
+      "first_at": "2025-06-14T01:05:05+02:00",
+      "last_at": "2025-06-14T01:58:14+02:00",
+      "title": "Night work on a Win95-styled generative website",
+      "summary": "At 01:00 in Paris time, generative_website logged 21 commits and 3 deployments. The messages focused on improving Win95 aesthetics, renaming the Vite project folder, renaming the site title, adding min height to the CRT display, and making the site title link with a Win95 navbar. The theme counts show Visual UI / layout, Refactor / organization, Branding / media assets, Pages deploy / domains, and Navigation / routing.",
+      "story_source": "model",
+      "commit_count": 21,
+      "deployment_count": 3,
+      "event_count": 24,
+      "repos": [
+        "louispaulet/generative_website"
+      ],
+      "repo_counts": {
+        "louispaulet/generative_website": 24
+      },
+      "messages": [
+        "style: improve win95 aesthetics",
+        "Merge pull request #16 from louispaulet/codex/modifier-design-vite-en-style-win95",
+        "Rename Vite project folder",
+        "Merge branch 'codex/renommer-projet-vite-en-generative_website_react' of https://github.com/louispaulet/generative_website into codex/renommer-projet-vite-en-generative_website_react",
+        "Merge pull request #17 from louispaulet/codex/renommer-projet-vite-en-generative_website_react",
+        "Rename site title",
+        "Add min height to CRT display",
+        "Make site title link and add Win95 navbar"
+      ],
+      "themes": {
+        "Visual UI / layout": 8,
+        "Refactor / organization": 4,
+        "Branding / media assets": 3,
+        "Pages deploy / domains": 3,
+        "Navigation / routing": 2
+      },
+      "links": [
+        "https://github.com/louispaulet/generative_website/commit/41fd58970ed59f7b5d8f016b2cc636f251779c62",
+        "https://github.com/louispaulet/generative_website/commit/f9ddfde38222888abbc8429147ba831e11d100d2",
+        "https://github.com/louispaulet/generative_website/commit/662f490ae9adea012e0969d9a6bf588b2c4d5f03",
+        "https://github.com/louispaulet/generative_website/commit/c7c46fab1aed737664651dcbbdcfe7a2d6370c27",
+        "https://github.com/louispaulet/generative_website/commit/d788acde3b531587c2ac8165d49bac99a518dbe9",
+        "https://github.com/louispaulet/generative_website/commit/25a3e89220ea0d002472462211207fab0744df4a"
+      ]
+    },
+    {
+      "key": "2025-06-08T23:00:00+02:00",
+      "first_at": "2025-06-08T23:05:30+02:00",
+      "last_at": "2025-06-08T23:53:44+02:00",
+      "title": "Late-night polish and filtering work in gpt_recommender",
+      "summary": "At 23:00 in Paris time, gpt_recommender logged 21 commits and 1 deployment. The messages mention correct fonts, a curated font list, navbar classes, loading spinners, a React spinner replacement, and topic filtering for recommendations. The theme counts emphasize Docs / instructions and Visual UI / layout, with smaller amounts of Search / filtering, Feature additions, and Tests / quality checks.",
+      "story_source": "model",
+      "commit_count": 21,
+      "deployment_count": 1,
+      "event_count": 22,
+      "repos": [
+        "louispaulet/gpt_recommender"
+      ],
+      "repo_counts": {
+        "louispaulet/gpt_recommender": 22
+      },
+      "messages": [
+        "[gpt_reco_app] apply correct fonts",
+        "curated font list and updated navbar class",
+        "Merge pull request #41 from louispaulet/codex/appliquer-les-polices-sur-les-pages",
+        "[gpt_reco_app] add loading spinners to buttons",
+        "make font choices important",
+        "[gpt_reco_app] replace custom spinner with react lib",
+        "Merge pull request #42 from louispaulet/codex/ajouter-un-spinner-de-chargement-aux-boutons",
+        "Add topic filtering for recommendations"
+      ],
+      "themes": {
+        "Docs / instructions": 8,
+        "Visual UI / layout": 7,
+        "Search / filtering": 2,
+        "Feature additions": 2,
+        "Tests / quality checks": 2
+      },
+      "links": [
+        "https://github.com/louispaulet/gpt_recommender/commit/164252c803098af6cb4a4a169b87d3a985a3f039",
+        "https://github.com/louispaulet/gpt_recommender/commit/f7e6ac0eb50069c8e03148f293ce57b3a6c1111f",
+        "https://github.com/louispaulet/gpt_recommender/commit/000c0903ca2866089dd6e3b471c9743458a96db5",
+        "https://github.com/louispaulet/gpt_recommender/commit/604a32ff81160f5adbaee55ea022800d79d59f62",
+        "https://github.com/louispaulet/gpt_recommender/commit/39d69a9dccf94ea77429a3a567cef4877dcffdb8",
+        "https://github.com/louispaulet/gpt_recommender/commit/f00a586c0a0cad782bc88d87f238e2810d3a3122"
+      ]
+    },
+    {
+      "key": "2025-06-09T14:00:00+02:00",
+      "first_at": "2025-06-09T14:06:44+02:00",
+      "last_at": "2025-06-09T14:52:14+02:00",
+      "title": "Afternoon routing and loading updates for gpt_recommender",
+      "summary": "At 14:00 in Paris time, gpt_recommender recorded 18 commits and 1 deployment. The messages cover footer and navbar color alignment, randomized loading messages, a NotFound page with tests, lazy-loaded pages, and code splitting with Suspense. The theme counts include Crawler / SEO / metadata, Visual UI / layout, Feature additions, Tests / quality checks, and Refactor / organization.",
+      "story_source": "model",
+      "commit_count": 18,
+      "deployment_count": 1,
+      "event_count": 19,
+      "repos": [
+        "louispaulet/gpt_recommender"
+      ],
+      "repo_counts": {
+        "louispaulet/gpt_recommender": 19
+      },
+      "messages": [
+        "[gpt_reco_app] align footer color with navbar",
+        "[gpt_reco_app] expand and randomize loading messages",
+        "Merge pull request #66 from louispaulet/codex/ajouter-des-messages-de-chargement-aléatoires",
+        "Merge pull request #65 from louispaulet/codex/conseiller-couleurs-navbar-et-footer",
+        "[gpt_reco_app] add NotFound page and tests",
+        "Merge pull request #67 from louispaulet/codex/ajouter-page-notfound-avec-test",
+        "feat: lazy load pages",
+        "Merge pull request #68 from louispaulet/codex/implement-code-splitting-with-suspense"
+      ],
+      "themes": {
+        "Crawler / SEO / metadata": 6,
+        "Visual UI / layout": 4,
+        "Feature additions": 3,
+        "Tests / quality checks": 3,
+        "Refactor / organization": 2
+      },
+      "links": [
+        "https://github.com/louispaulet/gpt_recommender/commit/5416c165a2c21aaf76e44b4c6237a535dcc11ff3",
+        "https://github.com/louispaulet/gpt_recommender/commit/219849298c65e893dcd337d9c73f35d0c0580731",
+        "https://github.com/louispaulet/gpt_recommender/commit/2292a3787c4869f1a75a0051d05f03e069c479f2",
+        "https://github.com/louispaulet/gpt_recommender/commit/e732cb22d003e073641ea9370c1cb46ac1bc7505",
+        "https://github.com/louispaulet/gpt_recommender/commit/031a6f4cf5c9baad3e9bab2b9334cf4960ac3b78",
+        "https://github.com/louispaulet/gpt_recommender/commit/fb6768c82075c5f8e70a66cf40ebcf1e2527702c"
+      ]
+    }
+  ]
+}
