@@ -6,6 +6,7 @@ import SectionChart from '../components/SectionChart'
 import SectionText from '../components/SectionText'
 import StatCard from '../components/StatCard'
 import SummarySection from '../components/SummarySection'
+import ThemeStackedBarChart from '../components/ThemeStackedBarChart'
 import {
   bedtimeCounts,
   dayCounts,
@@ -14,6 +15,7 @@ import {
   parseTsv,
   recentCommits,
   themeCounts,
+  themeMixByWeek,
   totalStats,
   weekCounts,
   yearCounts,
@@ -59,6 +61,7 @@ export default function HomePage() {
   const yearData = useMemo(() => yearCounts(rows, zone.key), [rows])
   const weekData = useMemo(() => weekCounts(rows, zone.key).slice(-52), [rows])
   const themes = useMemo(() => themeCounts(rows), [rows])
+  const themeMix = useMemo(() => themeMixByWeek(rows, { timeZone: zone.key }), [rows])
   const latest = useMemo(() => recentCommits(rows), [rows])
   const recent24h = rows.filter((row) => within(row.committer_date, now, 24)).length
   const recent7d = rows.filter((row) => within(row.committer_date, now, 24 * 7)).length
@@ -161,6 +164,10 @@ export default function HomePage() {
 
         <SectionChart title="Message themes" subtitle="Model-assisted categories from commit messages" eyebrow="Top tags" status={status} error={error}>
           <div className="h-[38rem] w-full">{chartsReady ? <ActivityBarChart data={themes} layout="vertical" xKey="commits" yKey="theme" xAxisProps={{ type: 'number' }} yAxisProps={{ width: 220, interval: 0, tick: { width: 220, textAnchor: 'end' } }} barRadius={[0, 8, 8, 0]} colorOffset={5} /> : null}</div>
+        </SectionChart>
+
+        <SectionChart title="Theme mix by week" subtitle="Top recurring message themes across the five-year export" eyebrow="Weekly stack" status={status} error={error}>
+          <div className="h-[44rem] min-h-0 w-full min-w-0">{chartsReady ? <ThemeStackedBarChart data={themeMix.data} themes={themeMix.themes} /> : null}</div>
         </SectionChart>
 
         <section className="rounded-2xl border border-white/10 bg-white/[0.05] p-6">

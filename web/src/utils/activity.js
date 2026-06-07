@@ -6,6 +6,28 @@ export const deploymentsSourcePath = `${import.meta.env.BASE_URL}data/deployment
 export const reposSourcePath = `${import.meta.env.BASE_URL}data/repos.tsv`
 export const zone = { key: 'Europe/Paris', label: 'Paris' }
 export const colors = ['#14b8a6', '#f59e0b', '#38bdf8', '#84cc16', '#f472b6', '#a78bfa', '#fb7185', '#22c55e']
+export const themeColors = [
+  '#14b8a6',
+  '#f59e0b',
+  '#38bdf8',
+  '#84cc16',
+  '#f472b6',
+  '#a78bfa',
+  '#fb7185',
+  '#22c55e',
+  '#f97316',
+  '#06b6d4',
+  '#eab308',
+  '#8b5cf6',
+  '#10b981',
+  '#ef4444',
+  '#6366f1',
+  '#d946ef',
+  '#0ea5e9',
+  '#65a30d',
+  '#f43f5e',
+  '#fde047',
+]
 
 export function bestIndex(values) {
   let index = 0

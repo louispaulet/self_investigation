@@ -122,6 +122,35 @@ export function themeCounts(rows, { limit = 20, minCommits = 2 } = {}) {
   return popular.length ? popular : sorted.slice(0, limit)
 }
 
+export function themeMixByWeek(rows, { timeZone = 'UTC', field = 'committer_date', themeLimit = 20, minCommits = 2 } = {}) {
+  const themes = themeCounts(rows, { limit: themeLimit, minCommits }).map((row) => row.theme)
+  const themeSet = new Set(themes)
+  const buckets = new Map()
+  let firstDay = ''
+  let lastDay = ''
+
+  for (const row of rows) {
+    const day = localDateKey(pickDate(row, field), timeZone)
+    if (!day) continue
+    const week = weekKey(day)
+    const item = buckets.get(week) || { week, commits: 0, shownCommits: 0 }
+    const theme = normalizedTheme(row.message_theme)
+    item.commits += 1
+    if (themeSet.has(theme)) {
+      item[theme] = (item[theme] || 0) + 1
+      item.shownCommits += 1
+    }
+    buckets.set(week, item)
+    if (!firstDay || day < firstDay) firstDay = day
+    if (!lastDay || day > lastDay) lastDay = day
+  }
+
+  return {
+    themes,
+    data: fillWeekBuckets(buckets, themes, firstDay, lastDay),
+  }
+}
+
 export function recentCommits(rows, count = 8, field = 'committer_date') {
   return [...rows]
     .sort((a, b) => new Date(pickDate(b, field)).getTime() - new Date(pickDate(a, field)).getTime())
@@ -194,6 +223,30 @@ function weekKey(dayKey) {
   const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1))
   const week = Math.ceil(((date - yearStart) / 86400000 + 1) / 7)
   return `${date.getUTCFullYear()}-W${String(week).padStart(2, '0')}`
+}
+
+function fillWeekBuckets(buckets, themes, firstDay, lastDay) {
+  if (!firstDay || !lastDay) return []
+  const current = weekStart(firstDay)
+  const end = weekStart(lastDay)
+  const rows = []
+  while (current <= end) {
+    const week = weekKey(current.toISOString().slice(0, 10))
+    rows.push(completeThemeBucket(buckets.get(week) || { week, commits: 0, shownCommits: 0 }, themes))
+    current.setUTCDate(current.getUTCDate() + 7)
+  }
+  return rows
+}
+
+function completeThemeBucket(row, themes) {
+  return themes.reduce((item, theme) => ({ ...item, [theme]: item[theme] || 0 }), { ...row })
+}
+
+function weekStart(dayKey) {
+  const date = new Date(`${dayKey}T00:00:00Z`)
+  const day = date.getUTCDay() || 7
+  date.setUTCDate(date.getUTCDate() - day + 1)
+  return date
 }
 
 function longestStreak(dayKeys) {
